@@ -3,76 +3,55 @@
 
 ![EZ Studios Banner](./assets/concepts/agnostic_banner.png)
 
+[**Read in Portuguese / Leia em Português**](#%EF%B8%8F-ez-studios-core-engine-v20-pt-br)
+
 ---
 
-## 💎 A Visão: De Jogador a Criador
-O **EZ Studios** não é apenas um motor de mapas; é a materialização do **Protocolo Entropia Zero**. Projetado para democratizar o desenvolvimento de jogos de alta complexidade, ele permite que estudantes e criadores gerem mundos, personagens e itens procedurais matematicamente perfeitos através de uma linguagem natural de intenções.
+## 💎 The Vision: From Player to Creator
+**EZ Studios** is more than a map engine; it is the materialization of the **Entropia Zero Protocol**. Designed to democratize high-complexity game development, it allows students and creators to generate mathematically perfect worlds, characters, and procedural items through a natural language of intent.
 
 ![Quantum Architect Vision](./assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
 
-### 🧠 Geração Holística (PEG)
-Nosso diferencial reside na **Procedural Experience Generation**. O motor gera ecossistemas completos sob o mesmo rigor matemático:
-- **World Engine**: Divisão volumétrica 3D via BSP e colapso de incerteza via WFC.
-- **Actor Factory**: Anatomia e IA procedurais.
-- **Item Algebra**: Balanceamento de atributos e raridade automática.
+### 🧠 Holistic Generation (PEG)
+Our differential lies in **Procedural Experience Generation**. The engine generates entire ecosystems under the same mathematical rigor:
+- **World Engine**: 3D volumetric partitioning via BSP and uncertainty collapse via WFC.
+- **Actor Factory**: Procedural anatomy and AI.
+- **Item Algebra**: Automatic attribute balancing and rarity.
 
 ![Holistic Showcase](./assets/diagrams/holistic_showcase.png)
 
 ---
 
-## 🛠️ Arquitetura Agnóstica: A Ponte Multi-Plataforma
-Diferente de ferramentas presas a uma única plataforma, o **EZ Studios Core** foi construído para ser universal. O núcleo matemático reside em um **IR (Intermediate Representation)** agnóstico, exportando código nativo para múltiplas engines.
+## 🛠️ Agnostic Architecture: The Multi-Platform Bridge
+Built to be universal, the **EZ Studios Core** operates on an agnostic **IR (Intermediate Representation)**, exporting native code to multiple engines (Roblox, Unity, Godot, Web).
 
 ![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
 
 ---
 
-## 🛡️ Safe Zone: Proteção e Pedagogia
-Integrado ao **Minor Protection Framework**, oferecemos um ambiente seguro para jovens desenvolvedores monetizarem seu talento com supervisão parental total.
+## 🔒 The Strategic Moat: Enterprise-Grade Value
+EZ Studios is structured as a high-barrier **Intellectual Property (IP)** asset ready for strategic acquisition or scaling.
+
+### 1. IP & Patent-Pending Compiler
+Our **Intent Compiler (Visual IR)** solves the "Creation Friction" problem, serving as a unique competitive advantage for any UGC platform.
+
+### 2. High-Fidelity Rigor ($D_4$ & AC-3)
+Built on **Dihedral Group Theory** and **Arc Consistency** validation, ensuring 100% stable runtime generation.
+
+### 3. ESG & Minority Protection
+Natively compliant with **LGPD/COPPA**, eliminating legal liability for parent platforms.
+
+---
+
+## 🛡️ Safe Zone: Protection & Pedagogy
+Integrated with the **Minor Protection Framework**, we provide a secure environment for young developers to monetize their talent with total parental supervision.
 
 ![Parental Dashboard](./assets/dashboards/parental_dashboard.png)
 
 ---
 
-## 🚀 Início Rápido
-
-### Instalação
-```bash
-git clone https://github.com/SH1W4/ez-studios-core.git
-cd ez-studios-core
-pnpm install
-```
-
-### Gerando via CLI (3D Multi-Layer)
-```bash
-pnpm tsx src/typescript/tests/bsp3d.test.ts
-```
-
----
-
-## 📊 Métricas de Elite
-- **Performance**: Colapso de 4.096 tiles em <500ms.
-- **Fidelidade**: 100% de consistência algébrica via validação **AC-3**.
-- **Impacto**: 120x mais densidade pedagógica que cursos tradicionais.
-
----
-
-## 🔒 The Strategic Moat: Enterprise-Grade Value
-EZ Studios is structured not just as a tool, but as a high-barrier **Intellectual Property (IP)** asset ready for strategic acquisition or scaling.
-
-### 1. IP & Patent-Pending Compiler
-Our **Intent Compiler (Visual IR)** is a proprietary bridging technology that solves the "Creation Friction" problem. It is designed to be a unique competitive advantage (moat) for any UGC platform.
-
-### 2. High-Fidelity Rigor ($D_4$ & AC-3)
-Unlike ad-hoc procedural tools, our engine is built on **Dihedral Group Theory** and **Arc Consistency** validation, ensuring 100% stable generation at runtime for mission-critical experiences.
-
-### 3. ESG & Minority Protection Framework
-Natively compliant with **LGPD/COPPA**, the EZ Core includes a modular safety layer for minor-to-minor transactions—eliminating legal liability for parent platforms and enabling safe global monetization.
-
----
-
 ## 📈 Investor Relations (M&A Ready)
-For Corporate Development teams and Venture Capitalists, the EZ Core represents a 120x pedagogical density advantage with a proven **LTV:CAC of 39:1**.
+For Corporate Development teams and VCs, the EZ Core offers a 120x pedagogical density advantage with a proven **LTV:CAC of 39:1**.
 
 - **Strategic Deck**: [Investor Pitch (PEG Framework)](./docs/business/INVESTOR_PITCH.md)
 - **Equity & Growth**: [Revised Business Plan](./docs/business/complete_business_plan.md)
@@ -80,13 +59,70 @@ For Corporate Development teams and Venture Capitalists, the EZ Core represents 
 
 ---
 
-## 📚 Documentação e Governança
-| Categoria | Documento Principal |
-|-----------|--------------------|
-| 🔬 **Ciência** | [Mathematical Formalization](./docs/technical/mathematical_formalization.md) |
-| 🛡️ **Segurança** | [Information Security Policy](./docs/legal/information_security_policy.md) |
-| ⚖️ **Legal** | [Patent Application](./docs/legal/patent_application_intent_compiler.md) |
-| 🤝 **Acordo** | [Shareholder Agreement](./docs/legal/corporate_structure_shareholder_agreement.md) |
+## 🚀 Quick Start
+
+### Installation
+```bash
+git clone https://github.com/SH1W4/ez-studios-core.git
+cd ez-studios-core
+pnpm install
+```
+
+### CLI Generation (3D Multi-Layer)
+```bash
+pnpm tsx src/typescript/tests/bsp3d.test.ts
+```
 
 ---
+
+## 📊 Elite Metrics
+- **Performance**: Collapse of 4,096 tiles in <500ms.
+- **Fidelity**: 100% algebraic consistency via **AC-3** validation.
+- **Impact**: 120x more pedagogical density than traditional courses.
+
+---
+
+## 📚 Documentation & Governance
+| Category | Main Document |
+|-----------|--------------------|
+| 🔬 **Science** | [Mathematical Formalization](./docs/technical/mathematical_formalization.md) |
+| 🛡️ **Security** | [Information Security Policy](./docs/legal/information_security_policy.md) |
+| ⚖️ **Legal** | [Patent Application](./docs/legal/patent_application_intent_compiler.md) |
+| 🏗️ **Framework** | [Holistic Generation](./docs/technical/holistic_generation_framework.md) |
+
+---
+---
+
+# ⚔️ EZ Studios: Core Engine v2.0 (PT-BR)
+> **Protocolo Entropia Zero** | Transformando a próxima geração de consumidores em **Arquitetos Quânticos**.
+
+## 💎 A Visão: De Jogador a Criador
+O **EZ Studios** é a materialização do **Protocolo Entropia Zero**. Projetado para democratizar o desenvolvimento de jogos de alta complexidade, ele permite a geração de mundos, personagens e itens procedurais matematicamente perfeitos via linguagem natural.
+
+### 🧠 Geração Holística (PEG)
+- **World Engine**: Divisão volumétrica 3D e colapso de incerteza (WFC).
+- **Actor Factory**: Anatomia e IA procedurais.
+- **Item Algebra**: Balanceamento de atributos e raridade automática.
+
+---
+
+## 🛠️ Arquitetura Agnóstica
+O núcleo matemático reside em uma **IR (Intermediate Representation)** agnóstica, exportando código nativo para múltiplas engines (Roblox, Unity, Godot, Web).
+
+---
+
+## 🔒 O "Moat" Estratégico
+1. **Compilador Patenteado**: Tecnologia de ponte proprietária que resolve a fricção de criação.
+2. **Rigor Científico ($D_4$ & AC-3)**: Estabilidade absoluta em tempo de execução.
+3. **ESG & Proteção**: Compliance nativo com LGPD/COPPA para menores desenvolvedores.
+
+---
+
+## 📈 Relação com Investidores
+- **Strategic Deck**: [Investor Pitch (PEG Framework)](./docs/business/INVESTOR_PITCH.md)
+- **Crescimento**: [Business Plan](./docs/business/complete_business_plan.md)
+- **Inteligência**: [Market Intelligence](./docs/business/market_intelligence.md)
+
+---
+
 **EZ Studios** — *Consolidating order, maximizing enterprise value.*
