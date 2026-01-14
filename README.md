@@ -21,6 +21,12 @@ A EZ Studios é mais do que um motor de jogo; é um **Hub de Inteligência Proce
 ## 🛠️ Agnostic Architecture: The Multi-Platform Bridge
 Built to be universal, the **EZ Studios Core** operates on an agnostic **IR (Intermediate Representation)**, exporting native code to multiple engines (Roblox, Unity, Godot, Web).
 
+### v2.3.0 Architecture: The Brain & The Body
+The new **Intent Compiler** (Brain) parses natural language into structural rules, while the **Polyglot Asset Registry** (Body) selects the correct native behavior for the target engine.
+
+![EZ Core v2.3.0 Architecture](./assets/diagrams/architecture_v2_3_brain_body.png)
+
+*(Previously: The Static Bridge)*
 ![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
 
 ---
