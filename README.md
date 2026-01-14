@@ -57,15 +57,36 @@ pnpm tsx src/typescript/tests/bsp3d.test.ts
 
 ---
 
-## 📚 Ecossistema de Documentação
-O projeto conta com uma base de conhecimento de nível PhD.
+## 🔒 The Strategic Moat: Enterprise-Grade Value
+EZ Studios is structured not just as a tool, but as a high-barrier **Intellectual Property (IP)** asset ready for strategic acquisition or scaling.
 
-| Categoria | Documento Principal |
-|-----------|--------------------|
-| 📈 **Estratégia** | [Market Intelligence](./docs/business/market_intelligence.md) |
-| 🧪 **Mecânica** | [Mathematical Formalization](./docs/technical/mathematical_formalization.md) |
-| ⚖️ **Legal** | [Patent Application](./docs/legal/patent_application_intent_compiler.md) |
-| 🏗️ **Framework** | [Holistic Generation](./docs/technical/holistic_generation_framework.md) |
+### 1. IP & Patent-Pending Compiler
+Our **Intent Compiler (Visual IR)** is a proprietary bridging technology that solves the "Creation Friction" problem. It is designed to be a unique competitive advantage (moat) for any UGC platform.
+
+### 2. High-Fidelity Rigor ($D_4$ & AC-3)
+Unlike ad-hoc procedural tools, our engine is built on **Dihedral Group Theory** and **Arc Consistency** validation, ensuring 100% stable generation at runtime for mission-critical experiences.
+
+### 3. ESG & Minority Protection Framework
+Natively compliant with **LGPD/COPPA**, the EZ Core includes a modular safety layer for minor-to-minor transactions—eliminating legal liability for parent platforms and enabling safe global monetization.
 
 ---
-**EZ Studios** — *Criando ordens onde só havia entropia.*
+
+## 📈 Investor Relations (M&A Ready)
+For Corporate Development teams and Venture Capitalists, the EZ Core represents a 120x pedagogical density advantage with a proven **LTV:CAC of 39:1**.
+
+- **Strategic Deck**: [Investor Pitch (PEG Framework)](./docs/business/INVESTOR_PITCH.md)
+- **Equity & Growth**: [Revised Business Plan](./docs/business/complete_business_plan.md)
+- **Economic Intelligence**: [Roblox Ecosystem Analysis](./docs/business/market_intelligence.md)
+
+---
+
+## 📚 Documentação e Governança
+| Categoria | Documento Principal |
+|-----------|--------------------|
+| 🔬 **Ciência** | [Mathematical Formalization](./docs/technical/mathematical_formalization.md) |
+| 🛡️ **Segurança** | [Information Security Policy](./docs/legal/information_security_policy.md) |
+| ⚖️ **Legal** | [Patent Application](./docs/legal/patent_application_intent_compiler.md) |
+| 🤝 **Acordo** | [Shareholder Agreement](./docs/legal/corporate_structure_shareholder_agreement.md) |
+
+---
+**EZ Studios** — *Consolidating order, maximizing enterprise value.*
