@@ -9,8 +9,8 @@ import {
   deserializeMapa,
   serializeMapa,
 } from "../core/models/serialization";
-import { ConfigBSP, ConfigWFC, Tile, MapaGerado, ContradictionError, Setor } from "../core/models/types";
-import { initializeGrid, stepCollapse, runToCompletion } from "../core/wfc/wfc";
+import { ConfigBSP, ConfigWFC, Tile, MapaGerado, ContradictionError } from "../core/models/types";
+import { initializeGrid, runToCompletion } from "../core/wfc/wfc";
 
 // Tiles de teste
 const TILES_TESTE: Tile[] = [
