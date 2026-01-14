@@ -79,7 +79,7 @@ A invenção consiste em um **Sistema de Compilação de Intenção Visual** que
 ```
 ┌─────────────────────────────────────────────────────┐
 │          VISUAL RULE EDITOR (Frontend)              │
-│  - Drag-and-drop de tiles                          │
+│  - Drag-and-drop de tiles                           │
 │  - Desenho de conexões de adjacência                │
 │  - Configuração de pesos e prioridades              │
 └──────────────────┬──────────────────────────────────┘

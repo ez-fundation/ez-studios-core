@@ -89,3 +89,39 @@ O uso de `local v3 = Vector3.new` vs `Vector3.new` em um loop de $n$ iterações
 - **Custo Local**: $O(1 \times \text{hash\_lookup} + n \times \text{register\_access})$
 
 O compilador automaticamente injeta "imports locais" para todas as funções matemáticas e construtores de tipos do Roblox para atingir o estado de **Entropia Zero de Execução**.
+
+---
+
+## 5. GERAÇÃO HOLÍSTICA E ENTROPIA SEMÂNTICA
+
+A Geração Holística expande o formalismo do mapa para **Entidades Abstratas** (Personagens, Itens, Missões).
+
+### 5.1 Entropia Semântica ($H_s$)
+Para uma entidade $E$, a entropia não mede apenas posição, mas a **viabilidade funcional** de seus atributos:
+
+$$H_s(E) = -\sum_{k \in \text{Attributes}} \omega_k \log_2(\pi_k)$$
+
+Onde:
+- $\omega_k$: Importância do atributo (ex: Dano vs Estética).
+- $\pi_k$: Probabilidade de o valor do atributo ser válido perante as regras de balanço.
+
+### 5.2 Álgebra de Atributos Procedurais
+Itens e personagens são gerados como grafos de sub-módulos. A consistência é garantida por uma **Matriz de Inerência**:
+
+$$I(A, B) = 1 \iff \text{Ator A pode portar Item B}$$
+
+---
+
+## 6. ÁLGEBRA DE SIMETRIA E CONSISTÊNCIA DE ARCO
+
+O motor utiliza a **Teoria de Grupos** e algoritmos de **Satisfação de Restrições (CSP)** para garantir a estabilidade do sistema.
+
+### 6.1 Grupo Diédrico $D_4$
+Cada tile $T$ é tratado como um elemento sob o grupo de simetria do quadrado. Aplicamos operadores de rotação ($R_{90}$) e reflexão ($F$) para reduzir a redundância de ativos:
+
+$$R_{90} \circ R_{90}(T) = R_{180}(T)$$
+
+Isso permite que um único modelo 3D gere 8 variações automáticas, reduzindo o custo de modelagem em 87.5%.
+
+### 6.2 Validação AC-3 (Arc Consistency)
+Para evitar estados insolúveis (*dead-ends*) no WFC, implementamos a consistência de arco. Antes de cada colapso, o motor verifica se para cada valor $x \in \text{Dominio}(X)$, existe um $y \in \text{Dominio}(Y)$ que satisfaz a matriz de adjacência.

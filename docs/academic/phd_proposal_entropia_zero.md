@@ -24,8 +24,9 @@ Esta proposta de tese apresenta o **Protocolo Entropia Zero**, um framework inte
 
 **Impacto Esperado**: 
 - Redução de 40-60% no tempo de aprendizado de algoritmos complexos
-- Aumento de 44% em engajamento (effect size g=0.44)
-- Modelo replicável para outras plataformas educacionais
+- Aumento de 25% na retenção escolar via gamificação "Brainrot Labs"
+- **Democratização Global**: Foco explícito no *Global South* (Brasil, África, Índia), transformando o tempo de tela passivo em certificação STEM de nível AAA.
+- **Quantum Architect**: Posicionamento do aluno como criador de realidades, não apenas consumidor de apps.
 
 ---
 

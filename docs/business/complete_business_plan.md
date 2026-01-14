@@ -26,14 +26,14 @@ O investimento em P&D inicial é **ZERO**, pois o núcleo tecnológico já está
 - ✅ **Integração**: Módulos Roblox/Luau prontos e testados
 - ✅ **Automação**: Scripts de setup e CI/CD configurados
 
-### Financeiro (Projeção Lean - 3 Anos)
+### Financeiro (Projeções de Pesquisa - 3 Anos)
 
-| Métrica | Ano 1 | Ano 2 | Ano 3 |
+| Métrica | Ano 1 (M12) | Ano 2 (M24) | Ano 3 |
 |---------|-------|-------|-------|
-| **Alunos** | 1.000 | 5.000 | 20.000 |
-| **Receita** | R$ 3M | R$ 15M | R$ 60M |
-| **Lucro** | **+R$ 1.2M** | R$ 6M | R$ 25M |
-| **Valuation** | R$ 15M | R$ 75M | R$ 600M |
+| **Alunos** | 2.000 | 10.000 | 25.000 |
+| **Receita (ARR)** | R$ 3.6M | R$ 17.9M | R$ 45M |
+| **Lucro** | R$ 1.5M | R$ 8M | R$ 22M |
+| **Valuation** | R$ 30M | R$ 150M | R$ 450M |
 
 > [!NOTE]
 > O lucro do Ano 1 foi ajustado para cima pois não há necessidade de contratar equipe de R&D do zero.
