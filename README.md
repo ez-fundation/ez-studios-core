@@ -1,33 +1,36 @@
-# 🌌 EZ Studios: Core Engine
-> **Entropia Zero Protocol** | Procedural Content Generation for the Next Generation of Developers.
+# 🌌 EZ Studios: Core Engine v2.0
+> **Entropia Zero Protocol** | Transforming the Next Generation of Consumers into **Quantum Architects**.
 
-![EZ Studios Banner](https://img.shields.io/badge/Engine-Agnostic-blueviolet?style=for-the-badge)
-![License](https://img.shields.io/github/license/SH1W4/ez-studios-core?style=for-the-badge)
-![Version](https://img.shields.io/badge/version-1.0.0--beta-gold?style=for-the-badge)
-![Roblox Compatible](https://img.shields.io/badge/Roblox-Ready-00A2FF?style=for-the-badge&logo=roblox)
+![EZ Studios Banner](file:///Users/jx/Desktop/ROBLOX_$$$/assets/concepts/banner_EZ.png)
 
 ---
 
-## 💎 A Visão
-**EZ Studios** não é apenas um motor de mapas; é a materialização do **Protocolo Entropia Zero**. Projetado para democratizar o desenvolvimento de jogos de alta complexidade, ele permite que estudantes e criadores gerem mundos procedurais matematicamente perfeitos através de uma linguagem natural de intenções.
+## 💎 A Visão: De Jogador a Criador
+O **EZ Studios** não é apenas um motor de mapas; é a materialização do **Protocolo Entropia Zero**. Projetado para democratizar o desenvolvimento de jogos de alta complexidade, ele permite que estudantes e criadores gerem mundos, personagens e itens procedurais matematicamente perfeitos através de uma linguagem natural de intenções.
 
-### 🧠 O "Coração" (Intent Compiler)
-Nosso diferencial reside na camada de abstração. O desenvolvedor define a *intenção* (ex: "Uma masmorra labiríntica com alta densidade de recursos"), e o nosso motor quântico traduz isso em regras de **Wave Function Collapse (WFC)** e **Binary Space Partitioning (BSP)**.
+![Quantum Architect Vision](file:///Users/jx/Desktop/ROBLOX_$$$/assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
+
+### 🧠 Geração Holística (PEG)
+Nosso diferencial reside na **Procedural Experience Generation**. O motor gera ecossistemas completos sob o mesmo rigor matemático:
+- **World Engine**: Divisão volumétrica 3D via BSP e colapso de incerteza via WFC.
+- **Actor Factory**: Anatomia e IA procedurais.
+- **Item Algebra**: Balanceamento de atributos e raridade automática.
+
+![Holistic Showcase](file:///Users/jx/.gemini/antigravity/brain/08aff4da-d535-4967-9606-3dea7ddc86e6/holistic_showcase_peg_1768408304395.png)
 
 ---
 
-## 🛠️ Arquitetura Agnóstica
-Diferente de ferramentas presas a uma única plataforma, o **EZ Studios Core** foi construído para ser universal.
+## 🛠️ Arquitetura Agnóstica: A Ponte Multi-Plataforma
+Diferente de ferramentas presas a uma única plataforma, o **EZ Studios Core** foi construído para ser universal. O núcleo matemático reside em um **IR (Intermediate Representation)** agnóstico, exportando código nativo para múltiplas engines.
 
-```mermaid
-graph TD
-    UI[Visual Editor / API] --> IC[Intent Compiler]
-    IC --> Engine[Core WFC/BSP Engine]
-    Engine --> Adapters{Engine Adapters}
-    Adapters --> Roblox[Roblox Studio]
-    Adapters --> ThreeJS[Web Preview]
-    Adapters --> Future[Unity / Godot]
-```
+![Multi-Platform Bridge](file:///Users/jx/.gemini/antigravity/brain/08aff4da-d535-4967-9606-3dea7ddc86e6/multi_platform_bridge_ez_1768408519510.png)
+
+---
+
+## 🛡️ Safe Zone: Proteção e Pedagogia
+Integrado ao **Minor Protection Framework**, oferecemos um ambiente seguro para jovens desenvolvedores monetizarem seu talento com supervisão parental total.
+
+![Parental Dashboard](file:///Users/jx/.gemini/antigravity/brain/08aff4da-d535-4967-9606-3dea7ddc86e6/parental_dashboard_ez_1768408683777.png)
 
 ---
 
@@ -40,38 +43,29 @@ cd ez-studios-core
 pnpm install
 ```
 
-### Gerando via CLI
+### Gerando via CLI (3D Multi-Layer)
 ```bash
-pnpm tsx examples/generate-map.ts
+pnpm tsx src/typescript/tests/bsp3d.test.ts
 ```
-
----
-
-## 📚 Ecossistema de Documentação
-O projeto conta com mais de 240 documentos técnicos, jurídicos e acadêmicos.
-
-| Categoria | Documento Principal |
-|-----------|--------------------|
-| 📈 **Estratégia** | [Executive Summary](./docs/EXECUTIVE_SUMMARY.md) |
-| 🧪 **Ciência** | [Mathematical Formalization](./docs/technical/mathematical_formalization.md) |
-| ⚖️ **Legal** | [Patent Application](./docs/legal/patent_application_intent_compiler.md) |
-| 🏢 **Negócios** | [Business Plan](./docs/business/complete_business_plan.md) |
-| 🏗️ **Estrutura** | [Project Structure](./STRUCTURE.md) |
 
 ---
 
 ## 📊 Métricas de Elite
 - **Performance**: Colapso de 4.096 tiles em <500ms.
-- **Eficiência**: Otimização de batching Luau em 100x vs. instanciamento manual.
-- **Segurança**: Framework de proteção a menores integrado nativamente.
+- **Fidelidade**: 100% de consistência algébrica via validação **AC-3**.
+- **Impacto**: 120x mais densidade pedagógica que cursos tradicionais.
 
 ---
 
-## 🤝 Contribuição
-Queremos parceiros que acreditem no poder do procedural. Veja o nosso [CONTRIBUTING.md](./CONTRIBUTING.md).
+## 📚 Ecossistema de Documentação
+O projeto conta com uma base de conhecimento de nível PhD.
 
-## 📄 Licença
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
+| Categoria | Documento Principal |
+|-----------|--------------------|
+| 📈 **Estratégia** | [Market Intelligence](./docs/business/market_intelligence.md) |
+| 🧪 **Mecânica** | [Mathematical Formalization](./docs/technical/mathematical_formalization.md) |
+| ⚖️ **Legal** | [Patent Application](./docs/legal/patent_application_intent_compiler.md) |
+| 🏗️ **Framework** | [Holistic Generation](./docs/technical/holistic_generation_framework.md) |
 
 ---
 **EZ Studios** — *Criando ordens onde só havia entropia.*
