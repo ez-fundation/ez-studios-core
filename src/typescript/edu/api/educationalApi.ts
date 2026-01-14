@@ -146,7 +146,7 @@ export function obterEstatisticas(): {
   const sucessos = logs.filter((l) => l.buildStatus === "success").length;
   const erros = logs.filter((l) => l.buildStatus === "error").length;
   const tempoMedio =
-    logs.reduce((sum, l) => sum + (l.duracao || 0), 0) / Math.max(logs.length, 1);
+    logs.reduce((sum, l) => sum + (Number(l.duracao) || 0), 0) / Math.max(logs.length, 1);
 
   return {
     totalBuilds: logs.length,

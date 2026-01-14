@@ -4,14 +4,13 @@
  */
 
 import { describe, it, expect, beforeEach } from "vitest";
-import { generateBspTree, flattenToSectors, validarSetores } from "../src/core/bsp/bsp";
-import { initializeGrid, stepCollapse, runToCompletion } from "../src/core/wfc/wfc";
+import { generateBSP } from "../core/bsp/bsp3d";
 import {
-  deserializeMapa,
   serializeMapa,
-  validarMapaDesserializado,
-} from "../src/core/models/serialization";
-import { ConfigBSP, ConfigWFC, Tile, MapaGerado, ContradictionError } from "../src/core/models/types";
+  deserializeMapa,
+} from "../core/models/serialization";
+import { ConfigBSP, ConfigWFC, Tile, MapaGerado, ContradictionError, Setor } from "../core/models/types";
+import { initializeGrid, stepCollapse, runToCompletion } from "../core/wfc/wfc";
 
 // Tiles de teste
 const TILES_TESTE: Tile[] = [

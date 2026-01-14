@@ -42,7 +42,7 @@ export class Logger {
       categoria: categoria as any,
       engineAlvo,
       seed,
-      mapStats,
+      stats: mapStats,
       buildStatus: "success",
       duracao,
     });

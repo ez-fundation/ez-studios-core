@@ -243,10 +243,11 @@ export interface LogEntrada {
   categoria: Intencao["categoria"];
   engineAlvo: "Roblox" | "Unity" | "Godot" | "Marketplace" | string;
   seed: string;
-  buildStatus: "success" | "error" | "warning";
+  buildStatus: "success" | "error" | "warning" | string;
   errorType?: string;
   errorMessage?: string;
-  duracao?: number;
+  duracao?: number | string;
+  stats?: { numSetores: number; numTiles: number; estetica?: string;[key: string]: any };
 }
 
 /**
