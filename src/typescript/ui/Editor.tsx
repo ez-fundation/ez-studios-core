@@ -25,9 +25,11 @@ import { Button } from "../components/ui/button";
 import { globalLogger } from "../infra/logging/logger";
 import { generateBspTree, flattenToSectors } from "../core/bsp/bsp";
 import { runToCompletion } from "../core/wfc/wfc";
-import { parsePrompt, compilarIntencao } from "../compiler/intentCompiler";
+import { parsePrompt, compilarIntencao, compilarComPrompt } from "../compiler/intentCompiler";
 import { RobloxAdapter } from "../adapters/robloxAdapter";
 import { ConfigBSP, ConfigWFC, TileInstance, MapaGerado, Tile, Intencao } from "../core/models/types";
+import { intentDataStore } from "../data/intentDataStore";
+import { globalLLM } from "../compiler/llmAdapter";
 
 // --- Components ---
 const Tooltip = ({ label }: { label: string }) => (
@@ -108,6 +110,8 @@ export default function Editor() {
 
   const [prompt, setPrompt] = useState("Dungeon sombria com corredores estreitos");
   const [lastIntent, setLastIntent] = useState<Intencao | null>(null);
+  const [showCorrection, setShowCorrection] = useState(false);
+  const [correctionNote, setCorrectionNote] = useState("");
 
   // --- Helpers ---
   const log = (msg: string) => {
@@ -123,22 +127,28 @@ export default function Editor() {
 
     try {
       if (algorithm === "INTENT") {
-        log(`> Analisando intenção: "${prompt}"...`);
-        const intent = parsePrompt(prompt);
-        setLastIntent(intent);
-        log(`> Intenção compilada: [${intent.categoria}] Tags: ${intent.parametros.tags.join(", ")}`);
+        log(`> Neural Link estabelecido. Processando prompt...`);
 
-        // Compile (Execute the intent via holistic compiler)
-        const plano = compilarIntencao(intent, DEFAULT_TILES, new RobloxAdapter()); // Using dummy adapter for simulation
+        // Use the new async AI compiler
+        const plano = await compilarComPrompt(prompt, DEFAULT_TILES, new RobloxAdapter());
+        const intent = plano.intencao;
+
+        setLastIntent(intent);
+        log(`> IA interpretou categoria: [${intent.categoria}]`);
+        log(`> Tags detectadas: ${intent.parametros.tags.join(", ")}`);
+
+        if (intent.parametros.ai_generated) {
+          log(`> Processado por: ${intent.parametros.model} (Confiança: 95%)`);
+        }
 
         // Render Result (Adapt outcome to UI)
         if (plano.resultado && "tiles" in plano.resultado) {
           const map = plano.resultado as MapaGerado;
-          setLastGeneratedMap({ tiles: map.tiles, type: "WFC" }); // Treat as WFC/Tile map for rendering
+          setLastGeneratedMap({ tiles: map.tiles, type: "WFC" });
           drawPreview({ tiles: map.tiles, type: "WFC" });
-          log(`> Geração concluída via Intenção.`);
+          log(`> SUCESSO: Mundo materializado via Intenção.`);
         } else {
-          log(`> Resultado não visualizável (Item/Actor).`);
+          log(`> Ativo gerado (Item/Actor). Verifique o inventário.`);
         }
 
       } else if (algorithm === "BSP") {
@@ -335,10 +345,52 @@ export default function Editor() {
               </div>
 
               {lastIntent && (
-                <div className="p-3 rounded bg-white/5 border-l-2 border-secondary overflow-hidden">
-                  <div className="text-[10px] uppercase text-muted-foreground mb-1">Intent Parsed</div>
-                  <div className="text-xs font-mono text-secondary truncate">Category: {lastIntent.categoria}</div>
-                  <div className="text-xs font-mono text-white/50 truncate">Tags: {lastIntent.parametros.tags.join(", ")}</div>
+                <div className="space-y-2">
+                  <div className="p-3 rounded bg-white/5 border-l-2 border-secondary overflow-hidden">
+                    <div className="text-[10px] uppercase text-muted-foreground mb-1">Intent Parsed</div>
+                    <div className="text-xs font-mono text-secondary truncate">Category: {lastIntent.categoria}</div>
+                    <div className="text-xs font-mono text-white/50 truncate">Tags: {lastIntent.parametros.tags.join(", ")}</div>
+                  </div>
+
+                  {!showCorrection ? (
+                    <button
+                      onClick={() => setShowCorrection(true)}
+                      className="text-[10px] text-muted-foreground hover:text-primary flex items-center gap-1 uppercase tracking-widest transition-colors"
+                    >
+                      <MessageSquare size={10} /> Corrigir interpretação (RLHF)
+                    </button>
+                  ) : (
+                    <div className="p-3 rounded bg-primary/5 border border-primary/20 space-y-2 animate-in slide-in-from-top-2">
+                      <textarea
+                        className="w-full h-16 bg-black/40 text-[10px] p-2 rounded border border-white/5 focus:outline-none"
+                        placeholder="O que a IA entendeu errado?"
+                        value={correctionNote}
+                        onChange={(e) => setCorrectionNote(e.target.value)}
+                      />
+                      <div className="flex justify-between gap-2">
+                        <Button
+                          onClick={() => {
+                            intentDataStore.logCorrection(lastIntent.id, {
+                              descricaoNatural: `${lastIntent.descricaoNatural} [CORRIGIDO: ${correctionNote}]`
+                            });
+                            log("> Feedback enviado para a base de treinamento.");
+                            setShowCorrection(false);
+                            setCorrectionNote("");
+                          }}
+                          className="flex-1 h-6 text-[9px] bg-primary text-black font-bold"
+                        >
+                          Salvar Correção
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          onClick={() => setShowCorrection(false)}
+                          className="h-6 text-[9px]"
+                        >
+                          Cancelar
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

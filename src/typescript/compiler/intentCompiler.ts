@@ -20,6 +20,8 @@ import {
 import { runToCompletion } from "../core/wfc/wfc";
 import { globalLogger } from "../infra/logging/logger";
 import { IEngineAdapter } from "../adapters";
+import { globalLLM } from "./llmAdapter";
+import { intentDataStore } from "../data/intentDataStore";
 
 /**
  * Mapeamento de Intenção → Regras base
@@ -99,7 +101,7 @@ export function compilarIntencao(
     criadoEm: new Date().toISOString(),
     hashGeracao: `ezhash_${seedUsado}_${Date.now()}`,
     tags: [intencao.categoria],
-    versaoMotor: "1.5-holistic",
+    versaoMotor: "2.3.0-AI",
   };
 
   try {
@@ -151,6 +153,9 @@ export function compilarIntencao(
         metadados: metadataBase,
       } as ActorInstance;
     }
+
+    // Log para Treinamento (Fase 36)
+    intentDataStore.logIntent(intencao.descricaoNatural || "", intencao, "global-llm");
 
     const codigoGerado = adapter.generateCode(resultado as any);
 
@@ -238,6 +243,23 @@ export function parsePrompt(prompt: string): Intencao {
       tags
     }
   };
+}
+
+/**
+ * Fluxo de Alto Nível: Prompt → IA → Resultado → Código
+ */
+export async function compilarComPrompt(
+  prompt: string,
+  tiles: Tile[],
+  adapter: IEngineAdapter,
+  seed?: string,
+  studentId?: string
+): Promise<PlanoDeGeracao> {
+  // 1. IA Processa a intenção
+  const intencao = await globalLLM.processarIntencao(prompt);
+
+  // 2. Compila a intenção em resultado procedural
+  return compilarIntencao(intencao, tiles, adapter, seed, studentId);
 }
 
 function criarRNG(seed: string): () => number {
