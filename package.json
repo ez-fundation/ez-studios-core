@@ -1,0 +1,33 @@
+{
+  "name": "ez-studios-core",
+  "version": "2.2.0",
+  "description": "Agnostic AI SaaS Core for Procedural Generation",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint 'src/typescript/**/*.{ts,tsx}'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc",
+    "dev": "tsx watch src/typescript/tests/bsp3d.test.ts"
+  },
+  "keywords": [
+    "procedural",
+    "wfc",
+    "bsp",
+    "ai",
+    "saas",
+    "roblox",
+    "unity"
+  ],
+  "author": "Antigravity AI",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0",
+    "tsx": "^4.0.0"
+  }
+}
