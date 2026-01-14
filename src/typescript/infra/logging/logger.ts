@@ -31,8 +31,8 @@ export class Logger {
     categoria: string,
     seed: string,
     engineAlvo: string,
-    mapStats?: { numSetores: number; numTiles: number },
-    duracao?: number,
+    mapStats?: { numSetores: number; numTiles: number; estetica?: string;[key: string]: any },
+    duracao?: number | string,
     studentId?: string
   ): void {
     this.registrarBuild({

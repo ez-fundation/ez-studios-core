@@ -127,8 +127,8 @@ export default function Editor() {
         intencao.categoria,
         "seed_" + Date.now(),
         threeAdapter.engineName,
-        { numSetores: 1, numTiles: data.tiles.length, estetica },
-        Date.now() - startTime
+        { numSetores: 1, numTiles: data.tiles.length, estetica: estetica || "Quantum" },
+        "COMPLETO"
       );
     } catch (error: any) {
       console.error("Erro na geração:", error);
