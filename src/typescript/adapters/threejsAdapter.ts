@@ -11,27 +11,42 @@ export class ThreeJsAdapter implements IEngineAdapter {
     readonly fileExtension = "json";
 
     /**
-     * Gera um JSON estruturado para o renderer Web
+     * Gera um JSON estruturado para o renderer Web (v2.2.0)
      */
-    generateCode(mapa: MapaGerado, options?: any): string {
+    generateCode(entidade: any, options?: any): string {
+        const estetica = entidade.metadados?.estetica || "Quantum";
+
         const data = {
-            id: mapa.id,
-            dimensions: mapa.dimensoes,
-            // Mapeamento simplificado para o frontend
-            tiles: mapa.tiles.map((t) => ({
+            id: entidade.id,
+            estetica: estetica,
+            dimensions: entidade.dimensoes || { largura: 1, altura: 1, profundidade: 1 },
+            // Mapeamento premium para o frontend
+            tiles: (entidade.tiles || []).map((t: any) => ({
                 id: t.tileId,
                 x: t.x,
                 y: t.y,
-                // Tradução de tipos de tiles para cores de preview
+                z: t.z,
                 color: this.getTileColor(t.tileId),
+                material: this.getMaterialForAesthetic(estetica),
+                opacity: estetica === "Quantum" ? 0.8 : 1.0
             })),
-            sectors: mapa.setores.map((s) => ({
+            sectors: (entidade.setores || []).map((s: any) => ({
                 id: s.id,
                 bounds: s.bounds,
             })),
         };
 
         return JSON.stringify(data, null, 2);
+    }
+
+    private getMaterialForAesthetic(estetica: string): string {
+        switch (estetica) {
+            case "Quantum": return "MeshStandardMaterial";
+            case "Cybernetic": return "MeshPhongMaterial";
+            case "Realistic": return "MeshPhysicalMaterial";
+            case "LowPoly": return "MeshToonMaterial";
+            default: return "MeshStandardMaterial";
+        }
     }
 
     getBuildStats(mapa: MapaGerado) {

@@ -70,6 +70,15 @@ export function generateDungeonForStudent(
       quantidadeAreas: 4,
       dificuldade: "normal",
     },
+    metadados: {
+      autorId: studentId,
+      seed: seed || "default_seed",
+      criadoEm: new Date().toISOString(),
+      hashGeracao: "pending",
+      tags: ["edu", "dungeon"],
+      versaoMotor: "2.2.0",
+      estetica: "Quantum" // Default para alunos
+    } as any
   };
 
   return compilarIntencao(intencao, TILES_PADRAO, robloxAdapter, seed, studentId);

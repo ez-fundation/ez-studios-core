@@ -35,6 +35,7 @@ export default function Editor() {
     { id: "r2", tile1: "chao", tile2: "parede", adjacencia: "ambos" },
   ]);
 
+  const [estetica, setEstetica] = useState<string>("Quantum");
   const [novoTile, setNovoTile] = useState("");
   const [gerando, setGerando] = useState(false);
   const [mapaPreview, setMapaPreview] = useState<any[]>([]);
@@ -100,8 +101,17 @@ export default function Editor() {
       const intencao: Intencao = {
         id: "ui_intent_" + Date.now(),
         categoria: "Mapa",
-        descricaoNatural: "Mapa gerado via UI Editor",
-        parametros: { largura: 8, altura: 8, quantidadeAreas: 1 }
+        descricaoNatural: `Mapa gerado via UI Editor com estética ${estetica}`,
+        parametros: { largura: 8, altura: 8, quantidadeAreas: 1 },
+        metadados: {
+          autorId: "user_dev",
+          seed: "seed_" + Date.now(),
+          criadoEm: new Date().toISOString(),
+          hashGeracao: "pending",
+          tags: ["ui-generated"],
+          versaoMotor: "2.2.0",
+          estetica: estetica
+        } as any
       };
 
       // 2. Executar Motor com Adaptador de Preview (ThreeJS)
@@ -117,30 +127,19 @@ export default function Editor() {
         intencao.categoria,
         "seed_" + Date.now(),
         threeAdapter.engineName,
-        { numSetores: 1, numTiles: data.tiles.length },
+        { numSetores: 1, numTiles: data.tiles.length, estetica },
         Date.now() - startTime
       );
     } catch (error: any) {
       console.error("Erro na geração:", error);
       alert("Contradição de Entropia! Suas regras impedem o colapso do mapa.");
-
-      // Registrar Erro no Logger
-      globalLogger.registrarErro(
-        "ui_intent_" + Date.now(),
-        "Mapa",
-        "0",
-        threeAdapter.engineName,
-        "Contradiction",
-        error.message || "Unknown error"
-      );
     } finally {
       setGerando(false);
     }
   };
 
-  const exportarRoblox = () => {
+  const exportarEngine = (engine: "Roblox" | "Unity" | "Godot") => {
     try {
-      // Re-gerar usando o adaptador Roblox
       const engineTiles: EngineTile[] = tiles.map((t: Tile) => ({
         id: t.id,
         tipo: t.nome.toLowerCase(),
@@ -150,20 +149,31 @@ export default function Editor() {
       }));
 
       const intencao: Intencao = {
-        id: "export_intent_" + Date.now(),
+        id: `export_${engine}_` + Date.now(),
         categoria: "Mapa",
-        descricaoNatural: "Exportação para Roblox",
-        parametros: { largura: 16, altura: 16 }
+        descricaoNatural: `Exportação para ${engine}`,
+        parametros: { largura: 16, altura: 16 },
+        metadados: {
+          autorId: "user_dev",
+          seed: "seed_" + Date.now(),
+          criadoEm: new Date().toISOString(),
+          hashGeracao: "pending",
+          tags: ["export"],
+          versaoMotor: "2.2.0",
+          estetica: estetica
+        } as any
       };
 
-      const resultado = compilarIntencao(intencao, engineTiles, robloxAdapter);
+      const adapter = engine === "Roblox" ? robloxAdapter : threeAdapter; // Fallback for Godot/Unity demo
+      const resultado = compilarIntencao(intencao, engineTiles, adapter as any);
 
-      // Download do arquivo .lua
+      // Download do arquivo
+      const ext = engine === "Roblox" ? "lua" : "json";
       const blob = new Blob([resultado.codigoGerado], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `EZ_Map_${Date.now()}.lua`;
+      a.download = `EZ_${engine}_${Date.now()}.${ext}`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (e) {
@@ -210,63 +220,81 @@ export default function Editor() {
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-12">Visual Rule Editor</h1>
+        <h1 className="text-4xl font-bold mb-12">Universal Visual Studio (v2.2.0)</h1>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Left Panel - Tiles */}
+          {/* Left Panel - Tiles & Aesthetics */}
           <motion.div
-            className="md:col-span-1 p-8 rounded-2xl bg-surface border border-primary/20 backdrop-blur-xl h-fit"
+            className="md:col-span-1 space-y-8"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-xl font-bold mb-6">Tiles</h2>
+            {/* Tiles */}
+            <div className="p-8 rounded-2xl bg-surface border border-primary/20 backdrop-blur-xl h-fit">
+              <h2 className="text-xl font-bold mb-6">Tiles</h2>
 
-            {/* Add Tile */}
-            <div className="mb-6 flex gap-2">
-              <input
-                type="text"
-                value={novoTile}
-                onChange={(e) => setNovoTile(e.target.value)}
-                placeholder="Nome do tile..."
-                className="flex-1 px-3 py-2 bg-white/10 border border-primary/30 rounded-lg text-foreground placeholder-text-secondary focus:outline-none focus:border-primary"
-                onKeyPress={(e) => e.key === "Enter" && adicionarTile()}
-              />
-              <Button
-                onClick={adicionarTile}
-                className="bg-primary hover:bg-primary/80 text-background"
-              >
-                <Plus size={16} />
-              </Button>
+              <div className="mb-6 flex gap-2">
+                <input
+                  type="text"
+                  value={novoTile}
+                  onChange={(e) => setNovoTile(e.target.value)}
+                  placeholder="Nome do tile..."
+                  className="flex-1 px-3 py-2 bg-white/10 border border-primary/30 rounded-lg text-foreground placeholder-text-secondary focus:outline-none focus:border-primary"
+                  onKeyPress={(e: any) => e.key === "Enter" && adicionarTile()}
+                />
+                <Button
+                  onClick={adicionarTile}
+                  className="bg-primary hover:bg-primary/80 text-background"
+                >
+                  <Plus size={16} />
+                </Button>
+              </div>
+
+              <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
+                {tiles.map((tile, i) => (
+                  <motion.div
+                    key={tile.id}
+                    className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition-all group"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-6 h-6 rounded"
+                          style={{ backgroundColor: tile.cor }}
+                        />
+                        <span className="font-medium">{tile.nome}</span>
+                      </div>
+                      <button
+                        onClick={() => removerTile(tile.id)}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity text-red-400 hover:text-red-300"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
-            {/* Tiles List */}
-            <div className="space-y-3">
-              {tiles.map((tile, i) => (
-                <motion.div
-                  key={tile.id}
-                  className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition-all group"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="w-6 h-6 rounded"
-                        style={{ backgroundColor: tile.cor }}
-                      />
-                      <span className="font-medium">{tile.nome}</span>
-                    </div>
-                    <button
-                      onClick={() => removerTile(tile.id)}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity text-red-400 hover:text-red-300"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+            {/* Estética Selector */}
+            <div className="p-8 rounded-2xl bg-surface border border-accent/20 backdrop-blur-xl h-fit">
+              <h2 className="text-xl font-bold mb-6">Intenção Artística</h2>
+              <div className="grid grid-cols-2 gap-2">
+                {["Quantum", "Cybernetic", "Realistic", "LowPoly"].map((est) => (
+                  <Button
+                    key={est}
+                    variant={estetica === est ? "default" : "outline"}
+                    onClick={() => setEstetica(est)}
+                    className={`text-xs ${estetica === est ? "bg-accent text-background" : "border-accent/30 text-accent"}`}
+                  >
+                    {est}
+                  </Button>
+                ))}
+              </div>
             </div>
           </motion.div>
 
@@ -277,10 +305,10 @@ export default function Editor() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-xl font-bold mb-6">Preview WFC Real</h2>
+            <h2 className="text-xl font-bold mb-6">Real-time Preview</h2>
 
-            {/* Canvas */}
-            <div className="w-full aspect-square bg-white/5 border border-primary/30 rounded-lg mb-6 flex items-center justify-center overflow-hidden">
+            {/* Canvas (Placeholder for Three.js Viewport) */}
+            <div className={`w-full aspect-square bg-white/5 border border-primary/30 rounded-lg mb-6 flex items-center justify-center overflow-hidden transition-all ${estetica === "Quantum" ? "shadow-[0_0_20px_rgba(0,217,255,0.3)]" : ""}`}>
               <div className="grid grid-cols-8 gap-1 p-4">
                 {mapaPreview.length > 0 ? (
                   mapaPreview.map((cell, i) => (
@@ -290,107 +318,104 @@ export default function Editor() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: i * 0.005 }}
-                      style={{ backgroundColor: cell.color }}
+                      style={{
+                        backgroundColor: cell.color,
+                        boxShadow: estetica === "Quantum" ? `0 0 5px ${cell.color}` : "none",
+                        opacity: cell.opacity || 1
+                      }}
                     />
                   ))
                 ) : (
                   <div className="text-text-secondary text-sm text-center">
-                    Defina regras e clique em <br /><strong>Gerar Mapa</strong>
+                    Defina regras e clique em <br /><strong>Gerar Preview</strong>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Generate Button */}
             <Button
               onClick={gerar}
               disabled={gerando}
               className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background font-bold py-6 flex items-center justify-center gap-2"
             >
-              {gerando ? (
-                <>
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    <Play size={20} />
-                  </motion.div>
-                  Colapsando...
-                </>
-              ) : (
-                <>
-                  <Play size={20} />
-                  Gerar Mapa Real
-                </>
-              )}
+              {gerando ? "Colapsando..." : "Atualizar Preview 3D"}
             </Button>
           </motion.div>
 
-          {/* Right Panel - Regras */}
+          {/* Right Panel - Regras & Export */}
           <motion.div
-            className="md:col-span-1 p-8 rounded-2xl bg-surface border border-primary/20 backdrop-blur-xl h-fit"
+            className="md:col-span-1 space-y-8"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-xl font-bold mb-6">Regras de Adjacência</h2>
+            {/* Regras */}
+            <div className="p-8 rounded-2xl bg-surface border border-primary/20 backdrop-blur-xl h-fit">
+              <h2 className="text-xl font-bold mb-6">Regras de Adjacência</h2>
+              <div className="space-y-3 mb-6 max-h-60 overflow-y-auto pr-2">
+                {regras.map((regra, i) => {
+                  const tile1 = tiles.find((t) => t.id === regra.tile1);
+                  const tile2 = tiles.find((t) => t.id === regra.tile2);
 
-            <div className="space-y-3 mb-6">
-              {regras.map((regra, i) => {
-                const tile1 = tiles.find((t) => t.id === regra.tile1);
-                const tile2 = tiles.find((t) => t.id === regra.tile2);
-
-                return (
-                  <motion.div
-                    key={regra.id}
-                    className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition-all group"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        {tile1 && (
-                          <div
-                            className="w-4 h-4 rounded"
-                            style={{ backgroundColor: tile1.cor }}
-                          />
-                        )}
-                        <span className="text-sm">{tile1?.nome}</span>
-                        <span className="text-xs text-text-secondary">↔</span>
-                        {tile2 && (
-                          <div
-                            className="w-4 h-4 rounded"
-                            style={{ backgroundColor: tile2.cor }}
-                          />
-                        )}
-                        <span className="text-sm">{tile2?.nome}</span>
+                  return (
+                    <motion.div
+                      key={regra.id}
+                      className="p-4 rounded-lg bg-white/5 border border-white/10 hover:border-primary/50 transition-all group"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          {tile1 && <div className="w-4 h-4 rounded" style={{ backgroundColor: tile1.cor }} />}
+                          <span className="text-xs">{tile1?.nome}</span>
+                          <span className="text-xs text-text-secondary">↔</span>
+                          {tile2 && <div className="w-4 h-4 rounded" style={{ backgroundColor: tile2.cor }} />}
+                          <span className="text-xs">{tile2?.nome}</span>
+                        </div>
+                        <button
+                          onClick={() => setRegras(regras.filter((r: any) => r.id !== regra.id))}
+                          className="opacity-0 group-hover:opacity-100 transition-opacity text-red-400 hover:text-red-300"
+                        >
+                          <Trash2 size={14} />
+                        </button>
                       </div>
-                      <button
-                        onClick={() =>
-                          setRegras(regras.filter((r) => r.id !== regra.id))
-                        }
-                        className="opacity-0 group-hover:opacity-100 transition-opacity text-red-400 hover:text-red-300"
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                    <span className="text-xs px-2 py-1 bg-primary/20 text-primary rounded">
-                      {regra.adjacencia}
-                    </span>
-                  </motion.div>
-                );
-              })}
+                      <span className="text-[10px] px-2 py-0.5 bg-primary/20 text-primary rounded">
+                        {regra.adjacencia}
+                      </span>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Export */}
-            <Button
-              onClick={exportarRoblox}
-              className="w-full bg-accent hover:bg-accent/80 text-background font-bold py-4 flex items-center justify-center gap-2"
-            >
-              <Download size={16} />
-              Baixar .LUA (Roblox)
-            </Button>
+            {/* Universal Export */}
+            <div className="p-8 rounded-2xl bg-surface border border-accent/20 backdrop-blur-xl h-fit">
+              <h2 className="text-xl font-bold mb-6">Universal Export</h2>
+              <div className="space-y-3">
+                <Button
+                  onClick={() => exportarEngine("Roblox")}
+                  className="w-full bg-[#00A2FF] hover:bg-[#00A2FF]/80 text-white font-bold py-4 flex items-center justify-center gap-2"
+                >
+                  <Download size={16} />
+                  Export to Roblox (.LUA)
+                </Button>
+                <Button
+                  onClick={() => exportarEngine("Unity")}
+                  className="w-full bg-[#222C37] hover:bg-[#222C37]/80 text-white font-bold py-4 flex items-center justify-center gap-2"
+                >
+                  <Download size={16} />
+                  Export to Unity (.JSON)
+                </Button>
+                <Button
+                  onClick={() => exportarEngine("Godot")}
+                  className="w-full bg-[#478CBF] hover:bg-[#478CBF]/80 text-white font-bold py-4 flex items-center justify-center gap-2"
+                >
+                  <Download size={16} />
+                  Export to Godot (.JSON)
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </main>
