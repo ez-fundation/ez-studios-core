@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, beforeEach } from "vitest";
-import { generateBSP } from "../core/bsp/bsp3d";
+import { generateBSP } from "../core/bsp/bsp";
 import {
   deserializeMapa,
   serializeMapa,
