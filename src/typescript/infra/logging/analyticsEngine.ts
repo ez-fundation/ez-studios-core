@@ -13,7 +13,16 @@ export interface SystemMetrics {
     totalXP: number;
     categoryDistribution: Record<string, number>;
     engineDistribution: Record<string, number>;
-    hoursSaved: number; // Métrica de Valor: Procedural vs Manual
+    hoursSaved: number;
+    // Phase 37: Monetization Hub
+    revenueBySource: {
+        marketplace: number; // 40% Commission logic
+        commissions: number; // 100% Direct
+        premium: number;     // Payouts estimativa
+        b2b: number;         // Licensing
+    };
+    projectedEarnings: number; // Total em R$
+    roiTotal: number;          // R$ per Hour Saved
 }
 
 export class AnalyticsEngine {
@@ -44,9 +53,29 @@ export class AnalyticsEngine {
         });
 
         // XP e Horas Economizadas
-        // Premissa: Cada geração de sucesso economiza ~30 min (0.5h) de trabalho manual
         const hoursSaved = successLogs.length * 0.5;
         const totalXP = successLogs.length * 50;
+
+        // Phase 37: Monetization Logic (Simulation based on volume)
+        // Premissa: 10% de itens gerados são vendidos no Marketplace (Ticket médio R$ 50)
+        const itemCount = categoryDistribution["Item"] || 0;
+        const marketplaceRevenue = (itemCount * 0.1) * 50 * 0.6; // 60% para o Arquiteto
+
+        // Premissa: 5% de criações são comissões diretas (Ticket médio R$ 200)
+        const commissionRevenue = (successLogs.length * 0.05) * 200;
+
+        // Premissa: Premium payouts baseados em tempo de retenção (Simulado)
+        const premiumRevenue = successLogs.length * 2.5;
+
+        const revenueBySource = {
+            marketplace: marketplaceRevenue,
+            commissions: commissionRevenue,
+            premium: premiumRevenue,
+            b2b: 0 // Reservado para futuros contratos
+        };
+
+        const projectedEarnings = marketplaceRevenue + commissionRevenue + premiumRevenue;
+        const roiTotal = hoursSaved > 0 ? projectedEarnings / hoursSaved : 0;
 
         return {
             totalBuilds,
@@ -55,7 +84,10 @@ export class AnalyticsEngine {
             totalXP,
             categoryDistribution,
             engineDistribution,
-            hoursSaved
+            hoursSaved,
+            revenueBySource,
+            projectedEarnings,
+            roiTotal
         };
     }
 
@@ -67,7 +99,10 @@ export class AnalyticsEngine {
             totalXP: 0,
             categoryDistribution: {},
             engineDistribution: {},
-            hoursSaved: 0
+            hoursSaved: 0,
+            revenueBySource: { marketplace: 0, commissions: 0, premium: 0, b2b: 0 },
+            projectedEarnings: 0,
+            roiTotal: 0
         };
     }
 }

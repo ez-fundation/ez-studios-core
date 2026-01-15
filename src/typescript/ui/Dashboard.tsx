@@ -250,13 +250,42 @@ export default function Dashboard() {
                   <div className="text-2xl font-bold text-white mb-1">{metrics.totalBuilds}</div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">Compilações</div>
                 </div>
-                <div className="p-4 rounded-xl bg-black/20 border border-white/5">
-                  <div className="text-2xl font-bold text-accent mb-1">{metrics.hoursSaved.toFixed(1)}h</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Horas Salvas</div>
+                <div className="p-4 rounded-xl bg-black/20 border border-white/5 col-span-1">
+                  <div className="text-2xl font-bold text-accent mb-1">R$ {metrics.projectedEarnings.toFixed(0)}</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Ganhos Est.</div>
                 </div>
               </div>
             </div>
           </GlassCard>
+        </div>
+
+        {/* Revenue Hub Section (Phase 37) */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <TrendingUp className="text-primary" /> Hub de Receitas (Multi-Channel)
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <GlassCard className="p-6" delay={0.3}>
+              <div className="text-sm text-muted-foreground mb-1">Marketplace (UGC)</div>
+              <div className="text-2xl font-bold text-white">R$ {metrics.revenueBySource.marketplace.toFixed(2)}</div>
+              <div className="mt-2 text-[10px] text-primary/60 font-mono">Commission: 60%</div>
+            </GlassCard>
+            <GlassCard className="p-6" delay={0.4}>
+              <div className="text-sm text-muted-foreground mb-1">Comissões Diretas</div>
+              <div className="text-2xl font-bold text-white">R$ {metrics.revenueBySource.commissions.toFixed(2)}</div>
+              <div className="mt-2 text-[10px] text-primary/60 font-mono">Platform Fee: 0%</div>
+            </GlassCard>
+            <GlassCard className="p-6" delay={0.5}>
+              <div className="text-sm text-muted-foreground mb-1">Premium Payouts</div>
+              <div className="text-2xl font-bold text-white">R$ {metrics.revenueBySource.premium.toFixed(2)}</div>
+              <div className="mt-2 text-[10px] text-primary/60 font-mono">Estimated by Time</div>
+            </GlassCard>
+            <GlassCard className="p-6" delay={0.6}>
+              <div className="text-sm text-muted-foreground mb-1">ROI (R$ / Hora)</div>
+              <div className="text-2xl font-bold text-accent">R$ {metrics.roiTotal.toFixed(2)}</div>
+              <div className="mt-2 text-[10px] text-accent/60 font-mono">Value per AI Generation</div>
+            </GlassCard>
+          </div>
         </div>
 
         {/* Trilhas Section */}
@@ -333,7 +362,7 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }
