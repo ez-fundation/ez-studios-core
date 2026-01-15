@@ -54,10 +54,10 @@ A invenção consiste em um **Sistema de Compilação de Intenção Visual** que
    - Sistema de conexões visuais para regras de adjacência
    - Visualização em tempo real de matriz de compatibilidade
 
-2. **Motor de Validação Algébrica**
-   - Verificação de consistência de regras
-   - Detecção de contradições lógicas
-   - Cálculo de entropia de Shannon para cada estado
+2. **Motor de Validação Algébrica e Isomórfica**
+   - Verificação de consistência de regras em tempo real.
+   - Detecção de contradições lógicas e cálculo de entropia.
+   - Execução paritária entre ambientes Web e Cloud.
 
 3. **Compilador Multi-Target**
    - Geração de código Luau (Roblox)
@@ -377,7 +377,7 @@ A presente invenção representa avanço significativo no estado da técnica ao 
 **ENDEREÇO**: [SEU ENDEREÇO]  
 **CPF/CNPJ**: [SEU CPF/CNPJ]  
 
-**Data**: 13 de Janeiro de 2026  
+**Data**: 15 de Janeiro de 2026  
 **Assinatura**: ________________________
 
 ---
