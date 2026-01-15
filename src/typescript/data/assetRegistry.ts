@@ -1,14 +1,14 @@
 export interface AssetBehavior {
     /**
-     * Código Lua para Roblox
+     * Caminho para o template Lua do Roblox (src/templates/...)
      */
     roblox?: string;
     /**
-     * Código C# para Unity
+     * Caminho para o template C# da Unity (src/templates/...)
      */
     unity?: string;
     /**
-     * Código GDScript para Godot
+     * Caminho para o template GDScript do Godot (src/templates/...)
      */
     godot?: string;
 }
@@ -47,30 +47,8 @@ export const ASSET_REGISTRY: AssetDefinition[] = [
         category: "Item",
         tags: ["espada", "fogo", "weapon", "melee"],
         behavior: {
-            roblox: `local tool = script.Parent
-local stats = tool:WaitForChild("Attributes")
-local damage = stats:FindFirstChild("dano") and stats.dano.Value or 10
-
-tool.Activated:Connect(function()
-    print("[EZ] Espada de Fogo ativada!")
-    local anim = Instance.new("Animation")
-    anim.AnimationId = "rbxassetid://0" -- Placeholder
-    local track = tool.Parent:FindFirstChild("Humanoid"):LoadAnimation(anim)
-    track:Play()
-    
-    -- Partículas de Fogo
-    local fire = Instance.new("Fire", tool.Handle)
-    task.wait(1)
-    fire:Destroy()
-end)`,
-            unity: `using UnityEngine;
-public class FireSword : MonoBehaviour {
-    public float damage = 10f;
-    void OnActivate() {
-        Debug.Log("[EZ] Fire Sword Activated!");
-        // Unity specific logic
-    }
-}`,
+            roblox: "roblox/lua/sword_fire.lua",
+            unity: "unity/csharp/FireSword.cs",
         },
         modelIds: {
             roblox: "rbxassetid://123456789", // Realistic Fire Sword
@@ -87,16 +65,7 @@ public class FireSword : MonoBehaviour {
         category: "Item",
         tags: ["pocao", "cura", "health", "consumivel"],
         behavior: {
-            roblox: `local tool = script.Parent
-tool.Activated:Connect(function()
-    local char = tool.Parent
-    local hum = char:FindFirstChild("Humanoid")
-    if hum then
-        hum.Health = hum.Health + 50
-        print("[EZ] Poção consumida. +50 HP")
-        tool:Destroy()
-    end
-end)`
+            roblox: "roblox/lua/potion_heal.lua"
         },
         modelIds: {
             roblox: "rbxassetid://987654321", // Sci-Fi Potion
@@ -112,15 +81,7 @@ end)`
         category: "Actor",
         tags: ["npc", "guard", "soldado"],
         behavior: {
-            roblox: `local npc = script.Parent
-local hum = npc:WaitForChild("Humanoid")
-local root = npc:WaitForChild("HumanoidRootPart")
-
-while true do
-    task.wait(math.random(2,5))
-    local target = Vector3.new(math.random(-10,10), 0, math.random(-10,10)) + root.Position
-    hum:MoveTo(target)
-end`
+            roblox: "roblox/lua/npc_guard.lua"
         },
         modelIds: {
             roblox: "rbxassetid://456123789", // Professional NPC Body
@@ -136,17 +97,7 @@ end`
         category: "Actor",
         tags: ["npc", "monstro", "zombie", "agressivo"],
         behavior: {
-            roblox: `local npc = script.Parent
-local hum = npc:WaitForChild("Humanoid")
-
-while task.wait(0.5) do
-    local players = game.Players:GetPlayers()
-    for _, p in pairs(players) do
-        if p.Character and (p.Character.PrimaryPart.Position - npc.PrimaryPart.Position).Magnitude < 20 then
-            hum:MoveTo(p.Character.PrimaryPart.Position)
-        end
-    end
-end`
+            roblox: "roblox/lua/npc_zombie.lua"
         },
         fallbackConfig: {
             color: "#005500",
@@ -180,8 +131,7 @@ export function resolveAssetDefinition(category: string, tags: string[]): AssetD
 
 function getDefaultBehavior(category: string, engine: string): string {
     if (engine === "roblox") {
-        return `-- Comportamento Genérico para ${category}
-print("[EZ] Entidade Genérica Inicializada")`;
+        return "roblox/lua/generic.lua";
     }
     return "// Generic Behavior";
 }

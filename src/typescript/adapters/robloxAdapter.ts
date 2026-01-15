@@ -6,6 +6,7 @@
 import { IEngineAdapter, RobloxAdapterOptions } from "./index";
 import { ProceduralEntity, MapaGerado, ActorInstance, ItemInstance, MarketplaceMetadata } from "../core/models/types";
 import { resolveAssetBehavior, resolveAssetDefinition } from "../data/assetRegistry";
+import { globalTemplateEngine } from "../core/templateEngine";
 
 export class RobloxAdapter implements IEngineAdapter {
     readonly engineName = "Roblox";
@@ -104,7 +105,19 @@ function MapBuilder.Build(workspace)
         // Phase 34: Hybrid Registry Lookup
         const assetDef = resolveAssetDefinition("Item", item.metadados.tags || []);
         const modelId = assetDef?.modelIds?.roblox;
-        const behaviorScript = resolveAssetBehavior("Item", item.metadados.tags || [], "roblox");
+        const behaviorTemplate = resolveAssetBehavior("Item", item.metadados.tags || [], "roblox");
+        
+        // Render template logic
+        let behaviorScript = "-- No behavior template found";
+        try {
+             behaviorScript = globalTemplateEngine.render(behaviorTemplate, {
+                damage: item.stats["dano"] || 10,
+                healAmount: 50, // Default fallback
+                category: item.tipo
+             });
+        } catch(e) {
+            console.warn("Failed to render item template", e);
+        }
 
         return `-- EZ STUDIOS - Item Factory (v2.3.0 - Hybrid Powered)
 -- ID: ${item.id} | Raridade: ${item.raridade} | Estética: ${estetica}
@@ -161,7 +174,18 @@ return ItemFactory.Create()
         // Phase 34: Hybrid Registry Lookup
         const assetDef = resolveAssetDefinition("Actor", actor.metadados.tags || []);
         const modelId = assetDef?.modelIds?.roblox;
-        const aiScript = resolveAssetBehavior("Actor", actor.metadados.tags || [], "roblox");
+        const aiTemplate = resolveAssetBehavior("Actor", actor.metadados.tags || [], "roblox");
+
+         // Render template logic
+         let aiScript = "-- No AI template found";
+         try {
+              aiScript = globalTemplateEngine.render(aiTemplate, {
+                 detectRange: 20, // Default
+                 category: actor.nome || "Unnamed"
+              });
+         } catch(e) {
+             console.warn("Failed to render actor template", e);
+         }
 
         return `-- EZ STUDIOS - Actor Engine (v2.3.0 - Hybrid Powered)
 -- ID: ${actor.id} | Nome: ${actor.nome}

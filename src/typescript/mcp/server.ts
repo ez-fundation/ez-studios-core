@@ -3,11 +3,15 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import {
     CallToolRequestSchema,
     ListToolsRequestSchema,
+    ReadResourceRequestSchema,
+    ListResourcesRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { intentCompiler } from "../compiler/intentCompiler";
 import { analyticsEngine } from "../infra/logging/analyticsEngine";
 import { ASSET_REGISTRY } from "../data/assetRegistry";
 import { RobloxAdapter } from "../adapters/robloxAdapter";
+import { globalTemplateEngine } from "../core/templateEngine";
+import { globalLogger } from "../infra/logging/logger";
 
 const robloxAdapter = new RobloxAdapter();
 
@@ -24,9 +28,44 @@ const server = new Server(
     {
         capabilities: {
             tools: {},
+            resources: {},
         },
     }
 );
+
+/**
+ * List available resources
+ */
+server.setRequestHandler(ListResourcesRequestSchema, async () => {
+  return {
+    resources: [
+      {
+        uri: "ez://logs/latest",
+        name: "Latest Build Logs",
+        mimeType: "application/json",
+        description: "Logs da última execução de build procedural",
+      },
+    ],
+  };
+});
+
+/**
+ * Read resources
+ */
+server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
+  const uri = request.params.uri;
+  if (uri === "ez://logs/latest") {
+      const logs = globalLogger.obterLogsEstruturados();
+      return {
+          contents: [{
+              uri,
+              mimeType: "application/json",
+              text: JSON.stringify(logs, null, 2)
+          }]
+      }
+  }
+  throw new Error("Resource not found");
+});
 
 /**
  * List available tools
@@ -69,6 +108,25 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                     },
                 },
             },
+             {
+                name: "hot_reload_registry",
+                description: "Limpa o cache de templates do AssetRegistry para recarregar alterações sem reiniciar o servidor.",
+                inputSchema: {
+                    type: "object",
+                    properties: {},
+                },
+            },
+            {
+                name: "preview_intent",
+                description: "Gera um preview ASCII visual do mapa que seria gerado por um prompt.",
+                inputSchema: {
+                    type: "object",
+                    properties: {
+                         prompt: { type: "string" }
+                    },
+                    required: ["prompt"]
+                },
+            },
         ],
     };
 });
@@ -81,6 +139,42 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     try {
         switch (name) {
+            case "hot_reload_registry": {
+                globalTemplateEngine.clearCache();
+                return {
+                    content: [{ type: "text", text: "Registry Templates Cache Cleared! 🔄" }]
+                };
+            }
+
+            case "preview_intent": {
+                 const prompt = String(args?.prompt);
+                 const result = await intentCompiler.compilarComPrompt(prompt, [], robloxAdapter);
+                 let ascii = "🗺️ MAP PREVIEW 🗺️\n";
+                 
+                 // Simple ASCII Renderer for WFC/BSP result
+                 if (result.resultado && "tiles" in result.resultado) {
+                     const tiles = (result.resultado as any).tiles;
+                     // Heurística de render: 10x10 grid preview
+                     for(let z=0; z<5; z++) {
+                         ascii += `\n[Level ${z}]\n`;
+                         for(let x=0; x<10; x++) {
+                             let row = "";
+                             for(let y=0; y<10; y++) {
+                                 const t = tiles.find((t:any) => t.x === x && t.y === y && t.z === z);
+                                 row += t ? "█" : ".";
+                             }
+                             ascii += row + "\n";
+                         }
+                     }
+                 } else {
+                     ascii = "Entity Preview: " + JSON.stringify(result.resultado, null, 2);
+                 }
+
+                 return {
+                    content: [{ type: "text", text: ascii }]
+                };
+            }
+
             case "compile_intent": {
                 const prompt = String(args?.prompt);
                 // Usamos o robloxAdapter padrão e uma lista de tiles vazia

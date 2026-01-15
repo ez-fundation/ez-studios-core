@@ -65,15 +65,23 @@ export class IntentDataStore {
         const dataset = this.getDataset();
         dataset.push(entry);
         // Persistência local (pode ser migrada para backend no futuro)
-        if (typeof localStorage !== "undefined") {
-            localStorage.setItem(this.storageKey, JSON.stringify(dataset));
+        try {
+            if (typeof localStorage !== "undefined") {
+                localStorage.setItem(this.storageKey, JSON.stringify(dataset));
+            }
+        } catch (e) {
+            console.warn("[DataStore] LocalStorage unavailable:", e);
         }
     }
 
     private getDataset(): IntentLogEntry[] {
-        if (typeof localStorage === "undefined") return [];
-        const raw = localStorage.getItem(this.storageKey);
-        return raw ? JSON.parse(raw) : [];
+        try {
+            if (typeof localStorage === "undefined") return [];
+            const raw = localStorage.getItem(this.storageKey);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            return [];
+        }
     }
 
     private getOrCreateSessionId(): string {

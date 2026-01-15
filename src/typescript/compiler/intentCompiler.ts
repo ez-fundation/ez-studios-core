@@ -4,6 +4,7 @@
  */
 
 import { generateBspTree, flattenToSectors } from "../core/bsp/bsp";
+import { fuzzyIncludes } from "../utils/fuzzy";
 import {
   ConfigBSP,
   ConfigWFC,
@@ -22,6 +23,17 @@ import { globalLogger } from "../infra/logging/logger";
 import { IEngineAdapter } from "../adapters";
 import { globalLLM } from "./llmAdapter";
 import { intentDataStore } from "../data/intentDataStore";
+
+/**
+ * Memória de Sessão (Simples)
+ * Armazena o último contexto para inferir anáforas ("isto", "ele")
+ */
+interface SessionContext {
+    lastCategory?: "Mapa" | "Item" | "Actor";
+    lastEntityId?: string;
+}
+
+const globalSession: SessionContext = {};
 
 /**
  * Mapeamento de Intenção → Regras base
@@ -198,25 +210,32 @@ export function parsePrompt(prompt: string): Intencao {
   const p = prompt.toLowerCase();
 
   // 1. Detectar Categoria
-  let categoria: "Mapa" | "Item" | "Actor" = "Mapa"; // Default
-  if (p.includes("item") || p.includes("espada") || p.includes("pocao") || p.includes("arma")) categoria = "Item";
-  else if (p.includes("actor") || p.includes("npc") || p.includes("monstro") || p.includes("boss")) categoria = "Actor";
+  let categoria: "Mapa" | "Item" | "Actor" = globalSession.lastCategory || "Mapa"; // Default memory
+  
+  // Detecção Fuzzy de Categoria
+  if (fuzzyIncludes(p, "item") || fuzzyIncludes(p, "espada") || fuzzyIncludes(p, "pocao") || fuzzyIncludes(p, "arma") || fuzzyIncludes(p, "sword")) categoria = "Item";
+  else if (fuzzyIncludes(p, "actor") || fuzzyIncludes(p, "npc") || fuzzyIncludes(p, "monstro") || fuzzyIncludes(p, "boss") || fuzzyIncludes(p, "guard")) categoria = "Actor";
+  else if (fuzzyIncludes(p, "mapa") || fuzzyIncludes(p, "dungeon") || fuzzyIncludes(p, "cidade")) categoria = "Mapa";
+
+  // Atualiza memória
+  globalSession.lastCategory = categoria;
 
   // 2. Extrair Tags / Keywords
   const tags: string[] = [];
   const keywords = ["fogo", "gelo", "floresta", "dungeon", "cidade", "cyberpunk", "medieval", "futurista", "natureza", "sombrio", "radiante"];
 
   keywords.forEach(k => {
-    if (p.includes(k)) tags.push(k);
+    if (fuzzyIncludes(p, k)) tags.push(k);
   });
 
   // 3. Detectar Parâmetros Específicos
   const parametros: any = {};
 
   // Estética
-  if (p.includes("cyber") || p.includes("quantum")) parametros.estetica = "Quantum";
-  else if (p.includes("medieval") || p.includes("rpg")) parametros.estetica = "Realistic";
-  else if (p.includes("lowpoly") || p.includes("simples")) parametros.estetica = "LowPoly";
+  // Estética (Fuzzy)
+  if (fuzzyIncludes(p, "cyber") || fuzzyIncludes(p, "quantum")) parametros.estetica = "Quantum";
+  else if (fuzzyIncludes(p, "medieval") || fuzzyIncludes(p, "rpg")) parametros.estetica = "Realistic";
+  else if (fuzzyIncludes(p, "lowpoly") || fuzzyIncludes(p, "simples")) parametros.estetica = "LowPoly";
   else parametros.estetica = "Quantum"; // Default system aesthetic
 
   // Dimensões (Simples heurística)
@@ -229,9 +248,10 @@ export function parsePrompt(prompt: string): Intencao {
   }
 
   // Item Specifics
+  // Item Specifics (Fuzzy)
   if (categoria === "Item") {
-    if (p.includes("espada")) parametros.tipo = "espada";
-    else if (p.includes("pocao")) parametros.tipo = "pocao";
+    if (fuzzyIncludes(p, "espada") || fuzzyIncludes(p, "sword")) parametros.tipo = "espada";
+    else if (fuzzyIncludes(p, "pocao") || fuzzyIncludes(p, "potion")) parametros.tipo = "pocao";
   }
 
   return {
