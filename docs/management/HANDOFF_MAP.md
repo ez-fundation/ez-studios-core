@@ -2,6 +2,11 @@
 
 Este documento serve como a "Ponte de Consciência" entre máquinas. Ele resume a arquitetura, o estado atual e a visão técnica do EZ Studios para que o desenvolvimento no **v15** continue sem atrito.
 
+## 🎓 Missão Principal: EdTech para Jovens Arquitetos (8-16 anos)
+Nunca se esqueça: o EZ Studios não é apenas para gerar código; é uma ferramenta pedagógica de vanguarda. 
+- **Objetivo**: Capacitar crianças e adolescentes a dominarem a criação de mundos, IA e economia digital.
+- **DNA**: Design intuitivo, segurança (Compliance) e educação financeira via ROI de criação.
+
 ---
 
 ## 🏗️ Mapa da Arquitetura Holística
@@ -70,6 +75,6 @@ Acabamos de completar um ciclo massivo de evolução:
 ---
 
 ## 📝 Instruções para a IA no v15
-> *"Olá! Você está assumindo o projeto EZ Studios. O sistema está em um estado de v2.4.0 Consolidade. Leia o `HANDOFF_MAP.md` e o `walkthrough.md`. O servidor MCP (`pnpm mcp`) é sua ferramenta principal para interagir com a engine. Siga as fases descritas no `task.md`."* 🛡️🤖
+> *"Olá! Você está assumindo o projeto EZ Studios. Lembre-se que nosso propósito é **educacional (8-16 anos)**. Cada ferramenta MCP, cada build de Analytics e cada prompt compilado deve servir para empoderar o jovem Arquiteto. O sistema está em um estado v2.4.0. Siga o `HANDOFF_MAP.md` e o `task.md`."* 🛡️🎓🤖
 
 **Finalizada a sessão por Antigravity.** 🛡️🌍💎

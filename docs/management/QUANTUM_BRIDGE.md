@@ -46,7 +46,13 @@ Você tem as seguintes armas à sua disposição (veja `src/typescript/mcp/serve
 ## 🛡️ Diretriz de Execução (Nitro V15)
 O Nitro V15 permite gerações simultâneas e fine-tuning local mais rápido. Use o `IntentDataStore` para alimentar o treinamento de um modelo especializado enquanto o Arquiteto trabalha. 
 
-**Mantenha a estética Executive Cyberpunk. Proteja o fluxo criativo.**
+## 🎓 A Grande Diretriz: DNA EdTech
+Nunca esqueça o nosso "Porquê": **Somos uma escola para desenvolvedores de 8 a 16 anos.**
+- As ferramentas de IA e o MCP devem ser pontes para o aprendizado, não atalhos que escondem a lógica. 
+- O Dashboard de ROI é uma aula de economia prática. 
+- O Editor RLHF é um mentor virtual paciente.
+
+**Mantenha a estética Executive Cyberpunk, mas garanta que o poder da IA sirva para educar o jovem Arquiteto.**
 
 ---
 **Auth Code:** `EZ-Quantum-Bridge-Alpha-1`
