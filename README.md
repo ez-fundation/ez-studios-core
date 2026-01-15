@@ -1,69 +1,56 @@
-# 🌌 EZ Studios: Core Engine v2.4.1
+# 🌌 EZ Studios: Core Engine v2.5.0
 > **Entropia Zero Protocol** | Transforming the Next Generation of Consumers into **Quantum Architects**.
 
 ![EZ Studios Banner](./assets/concepts/agnostic_banner.png)
 
-[**Read in Portuguese / Leia em Português**](#%EF%B8%8F-ez-studios-core-engine-v20-pt-br)
+[**Read in Portuguese / Leia em Português**](#%EF%B8%8F-ez-studios-core-engine-v250-pt-br)
 
 ---
 
 ## 💎 The Vision: From Player to Creator
 **EZ Studios** is more than a map engine; it is the materialization of the **Entropia Zero Protocol**. Designed to democratize high-complexity game development, it allows students and creators to generate mathematically perfect worlds, characters, and procedural items through a natural language of intent.
 
+### v2.5.0 Evolution: Entropia Zero Aesthetic
+We have evolved from a procedural hub to a **Premium Agentic SaaS**. Our new **Entropia Zero** aesthetic (Indigo Void & Neural Neon) projeta a precisão matemática do nosso núcleo:
+- **Neural Assistant**: A fully animated, state-aware AI centerpiece powered by Framer Motion.
+- **Glassmorphic UI**: High-transparency displays that simulate advanced technical cockpits.
+
 ![Quantum Architect Vision](./assets/concepts/Poster_Conceitual_EZ_STUDIO.png)
 
-EZ Studios is more than a game engine; it is an **Agnostic Procedural Intelligence Hub**. Our core technology, now evolving into a **Cloud-First Generative AI SaaS**, abstracts complex mathematical structures (AC-3, $D_4$ Groups) into a seamless "Intent-to-Asset" pipeline. By decentralizing generation and centralizing intelligence in the cloud, we ensure maximum IP protection and infinite scalability for the next generation of UGC.
-
-A EZ Studios é mais do que um motor de jogo; é um **Hub de Inteligência Procedural Agnóstica**. Nossa tecnologia principal, agora evoluindo para um **SaaS de IA Generativa Cloud-First**, abstrai estruturas matemáticas complexas (AC-3, Grupos $D_4$) em um pipeline contínuo de "Intenção para Ativo". Ao descentralizar a geração e centralizar a inteligência na nuvem, garantimos a proteção máxima de IP e escalabilidade infinita para a próxima geração de UGC.
+EZ Studios abstracts complex mathematical structures (AC-3, $D_4$ Groups) into a seamless "Intent-to-Asset" pipeline. By decentralizing generation and centralizing intelligence in the cloud, we ensure maximum IP protection and infinite scalability for the next generation of UGC.
 
 ---
 
 ## 🛠️ Agnostic Architecture: The Multi-Platform Bridge
 Built to be universal, the **EZ Studios Core** operates on an agnostic **IR (Intermediate Representation)**, exporting native code to multiple engines (Roblox, Unity, Godot, Web).
 
-### v2.3.0 Architecture: The Brain & The Body
-The new **Intent Compiler** (Brain) parses natural language into structural rules, while the **Polyglot Asset Registry** (Body) selects the correct native behavior for the target engine.
-
-![EZ Core v2.3.0 Architecture](./assets/diagrams/architecture_v2_3_brain_body.png)
-
-*(Previously: The Static Bridge)*
-![Multi-Platform Bridge](./assets/diagrams/multi_platform_bridge.png)
-
-### v2.4.0 The Agentic Interface (MCP Protocol)
-The system is now fully controllable by AI Agents via the **Model Context Protocol (MCP)**. This allows autonomous agents to inspect logs, hot-reload templates, and visually preview generations before committing them.
+### Architecture Roadmap
+- **v2.3.0 (The Brain & Body)**: Introduced the **Intent Compiler** and **Polyglot Asset Registry**.
+- **v2.5.0 (The Neural Bridge)**: Upgraded with a **Polyglot Brain** (PT/EN support, Fuzzy Matching) and the **Neural Assistant** for real-time visualization.
 
 ![Agentic Interface Flow](./assets/diagrams/mcp_agentic_flow_v2.png)
 
 ---
 
-## 🆕 What's New in v2.3.0 (Polyglot Core)
+## 🆕 What's New in v2.5.0 (Visual & Polyglot)
 
-### Intent Compiler (The Brain)
-Natural language processing for procedural generation. Type **"Fire Dungeon"** and the engine auto-configures WFC rules, aesthetics, and tile sets.
+### Polyglot Intent Compiler
+- **Multi-language Support**: Seamless parsing of Portuguese and English prompts.
+- **Fuzzy Matching**: Resilient intent parsing that handles typos and conceptual synonyms.
+- **Session Memory**: Context-aware generation (AI remembers previous prompts).
 
-### Polyglot Asset Registry (The Body)
-Data-driven behavior system supporting multiple engines:
-- **Roblox** (Lua)
-- **Unity** (C#)  
-- **Godot** (GDScript)
-
-Scripts and behaviors are now **assets**, not hardcoded logic. Add new items without recompiling the adapter.
+### Entropia Zero Interface
+- **Animated Neural Assistant**: Dynamic visual feedback for AI processing states.
+- **Isomorphic Core**: The engine now runs natively in the browser and Node.js.
+- **Modular Icon Suite**: Custom-tailored iconography for the EZ Studios ecosystem.
 
 ---
 
-## 🏰 The Strategic Moat / O Fosso Estratégico
-
-### 1. Intellectual Property (Black Box Cloud Core)
-Unlike local software, our **Agnostic Core** is hosted in a secure cloud environment. This "Black Box" architecture prevents reverse engineering and ensures that our proprietary algorithms (Intent Compiler) remain a protected corporate asset.
-
-### 2. Neural Procedural Networks (ML-First)
-We are integrating Machine Learning to predict user architectural intent. This layer of "Predictive Math" reduces computational cost and allows for realistic style-transfer across different engine aesthetics (Quantum, Realistic, etc.).
-
-### 3. High-Fidelity Rigor (AC-3 & D4)
-The engine utilizes the **Arc-Consistency (AC-3)** algorithm and **Symmetry Groups ($D_4$)** to ensure 100% stable world generation. No "broken seeds" — only pure mathematical perfection.
-
-### 4. Minor Protection & ESG (Safety Engine)
-Fully compliant with **LGPD** and **COPPA**, our engine includes a native "Safety Layer" designed specifically for minor developers in the global south, providing a secure and educational ecosystem.
+## 🏰 The Strategic Moat
+1. **Intellectual Property**: Our **Black Box Cloud Core** prevents reverse engineering.
+2. **Neural Procedural Networks**: ML-First layer to predict user architectural intent.
+3. **High-Fidelity Rigor**: Utilizes **AC-3** and **Symmetry Groups ($D_4$)** for stable world generation.
+4. **Minor Protection & ESG**: Native safety layer compliant with **LGPD** and **COPPA**.
 
 ---
 
@@ -77,25 +64,16 @@ For Corporate Development teams and VCs, the EZ Core offers a 120x pedagogical d
 ---
 
 ## 🚀 Quick Start
-
-### Installation
 ```bash
 git clone https://github.com/SH1W4/ez-studios-core.git
 cd ez-studios-core
 pnpm install
 ```
 
-### CLI Generation (3D Multi-Layer)
-```bash
-pnpm tsx src/typescript/tests/bsp3d.test.ts
-```
-
----
-
-## 📊 Elite Metrics
-- **Performance**: Collapse of 4,096 tiles in <500ms.
-- **Fidelity**: 100% algebraic consistency via **AC-3** validation.
-- **Impact**: 120x more pedagogical density than traditional courses.
+## 🛠️ Utility: DocSync Integration
+We integrated **DocSync** as a dedicated development tool.
+- **Command**: `npm run docs:sync`
+- **Purpose**: AI-driven documentation and template refinement.
 
 ---
 
@@ -110,35 +88,28 @@ pnpm tsx src/typescript/tests/bsp3d.test.ts
 ---
 ---
 
-# ⚔️ EZ Studios: Core Engine v2.3.0 (PT-BR)
+# ⚔️ EZ Studios: Core Engine v2.5.0 (PT-BR)
 > **Protocolo Entropia Zero** | Transformando a próxima geração de consumidores em **Arquitetos Quânticos**.
 
 ## 💎 A Visão: De Jogador a Criador
-O **EZ Studios** é a materialização do **Protocolo Entropia Zero**. Projetado para democratizar o desenvolvimento de jogos de alta complexidade, ele permite a geração de mundos, personagens e itens procedurais matematicamente perfeitos via linguagem natural.
+O **EZ Studios** é a materialização do **Protocolo Entropia Zero**. Ele permite a geração de mundos, personagens e itens procedurais matematicamente perfeitos via linguagem natural.
 
-### 🧠 Geração Holística (PEG)
-- **World Engine**: Divisão volumétrica 3D e colapso de incerteza (WFC).
-- **Actor Factory**: Anatomia e IA procedurais.
-- **Item Algebra**: Balanceamento de atributos e raridade automática.
+### Evolução v2.5.0: Estética Entropia Zero
+Evoluímos para um **SaaS Agêntico Premium**. Nossa nova estética cyberpunk (Indigo Void & Neural Neon) projeta a precisão do núcleo:
+- **Neural Assistant**: Um núcleo de IA totalmente animado que reage ao processamento.
+- **UI Glassmorphic**: Displays de alta transparência para imersão técnica.
 
----
-
-## 🛠️ Arquitetura Agnóstica
-O núcleo matemático reside em uma **IR (Intermediate Representation)** agnóstica, exportando código nativo para múltiplas engines (Roblox, Unity, Godot, Web).
+### 🧠 O que há de novo na v2.5.0
+- **Compilador Poliglota**: Suporte PT/EN com **Fuzzy Matching** (tolerância a erros).
+- **Core Isomórfico**: Motor roda nativamente no Navegador e Node.js.
+- **Ícones Customizados**: Iconografia EZ Studios via Sprite Sheets.
 
 ---
 
 ## 🔒 O "Moat" Estratégico
-1. **Compilador Patenteado**: Tecnologia de ponte proprietária que resolve a fricção de criação.
+1. **Compilador Patenteado**: Tecnologia proprietária que resolve a fricção de criação.
 2. **Rigor Científico ($D_4$ & AC-3)**: Estabilidade absoluta em tempo de execução.
-3. **ESG & Proteção**: Compliance nativo com LGPD/COPPA para menores desenvolvedores.
-
----
-
-## 📈 Relação com Investidores
-- **Strategic Deck**: [Investor Pitch (PEG Framework)](./docs/business/INVESTOR_PITCH.md)
-- **Crescimento**: [Business Plan](./docs/business/complete_business_plan.md)
-- **Inteligência**: [Market Intelligence](./docs/business/market_intelligence.md)
+3. **ESG & Proteção**: Compliance nativo com LGPD/COPPA para menores.
 
 ---
 
