@@ -5,7 +5,7 @@
 
 import { IEngineAdapter, RobloxAdapterOptions } from "./index";
 import { ProceduralEntity, MapaGerado, ActorInstance, ItemInstance, MarketplaceMetadata } from "../core/models/types";
-import { resolveAssetBehavior } from "../data/assetRegistry";
+import { resolveAssetBehavior, resolveAssetDefinition } from "../data/assetRegistry";
 
 export class RobloxAdapter implements IEngineAdapter {
     readonly engineName = "Roblox";
@@ -101,27 +101,38 @@ function MapBuilder.Build(workspace)
     private generateItemCode(item: ItemInstance, _opt: Required<RobloxAdapterOptions>): string {
         const estetica = item.metadados.estetica || "Quantum";
 
-        // Lookup Behavior from Registry
+        // Phase 34: Hybrid Registry Lookup
+        const assetDef = resolveAssetDefinition("Item", item.metadados.tags || []);
+        const modelId = assetDef?.modelIds?.roblox;
         const behaviorScript = resolveAssetBehavior("Item", item.metadados.tags || [], "roblox");
 
-        return `-- EZ STUDIOS - Item Factory (v2.2.0 - Registry Powered)
+        return `-- EZ STUDIOS - Item Factory (v2.3.0 - Hybrid Powered)
 -- ID: ${item.id} | Raridade: ${item.raridade} | Estética: ${estetica}
--- Powered by Polyglot Asset Registry
+-- Mode: ${modelId ? "Professional Asset" : "Procedural Fallback"}
 
 local ItemFactory = {}
 
 function ItemFactory.Create()
-    local tool = Instance.new("Tool")
+    local tool
+    
+    if "${modelId || ""}" ~= "" then
+        print("[EZ] Loading professional asset: ${modelId}")
+        -- Simulation: Usually tool = game:GetService("InsertService"):LoadAsset(ID):GetChildren()[1]
+        tool = Instance.new("Tool")
+        local idVal = Instance.new("StringValue", tool)
+        idVal.Name = "AssetId"
+        idVal.Value = "${modelId}"
+    else
+        tool = Instance.new("Tool")
+        local handle = Instance.new("Part", tool)
+        handle.Name = "Handle"
+        handle.Size = Vector3.new(1, 0.5, 4)
+        handle.Color = Color3.fromHSV(math.random(), 0.8, 1)
+        ${this.applyArtisticFinalization("handle", item.metadados)}
+    end
+
     tool.Name = "${item.tipo.toUpperCase()}_${item.id}"
     tool.RequiresHandle = true
-    
-    local handle = Instance.new("Part", tool)
-    handle.Name = "Handle"
-    handle.Size = Vector3.new(1, 0.5, 4)
-    handle.Color = Color3.fromHSV(math.random(), 0.8, 1)
-    
-    -- Aplicar Finalização Artística
-${this.applyArtisticFinalization("handle", item.metadados)}
     
     -- Injetar Stats no Tool
     local stats = Instance.new("Configuration", tool)
@@ -136,7 +147,7 @@ ${this.applyArtisticFinalization("handle", item.metadados)}
 ${behaviorScript}
     ]]
     
-    print("[EZ Studios] Item ${item.id} finalizado via Registry.")
+    print("[EZ Studios] Item ${item.id} finalizado.")
     return tool
 end
 
@@ -147,29 +158,45 @@ return ItemFactory.Create()
     private generateActorCode(actor: ActorInstance, _opt: Required<RobloxAdapterOptions>): string {
         const estetica = actor.metadados.estetica || "Quantum";
 
-        // Lookup Behavior from Registry
+        // Phase 34: Hybrid Registry Lookup
+        const assetDef = resolveAssetDefinition("Actor", actor.metadados.tags || []);
+        const modelId = assetDef?.modelIds?.roblox;
         const aiScript = resolveAssetBehavior("Actor", actor.metadados.tags || [], "roblox");
 
-        return `-- EZ STUDIOS - Actor Engine (v2.2.0 - Registry Powered)
+        return `-- EZ STUDIOS - Actor Engine (v2.3.0 - Hybrid Powered)
 -- ID: ${actor.id} | Nome: ${actor.nome}
--- Powered by Polyglot Asset Registry
+-- Mode: ${modelId ? "Professional Asset" : "Procedural Fallback"}
 
 local ActorEngine = {}
 
 function ActorEngine.Spawn(position)
-    local npc = Instance.new("Model")
+    local npc
+    
+    if "${modelId || ""}" ~= "" then
+        -- Simulation: In a real environment, we would load the Model from Roblox Cloud
+        npc = Instance.new("Model")
+        local idVal = Instance.new("StringValue", npc)
+        idVal.Name = "AssetId"
+        idVal.Value = "${modelId}"
+        
+        -- We still need a Humanoid for physics/logic
+        Instance.new("Humanoid", npc)
+        local hrp = Instance.new("Part", npc)
+        hrp.Name = "HumanoidRootPart"
+        hrp.Transparency = 1
+        hrp.Position = position
+    else
+        npc = Instance.new("Model")
+        Instance.new("Humanoid", npc)
+        local hrp = Instance.new("Part", npc)
+        hrp.Name = "HumanoidRootPart"
+        hrp.Position = position
+        hrp.Size = Vector3.new(2, 2, 1)
+        hrp.Color = Color3.fromRGB(0, 150, 255)
+        ${this.applyArtisticFinalization("hrp", actor.metadados)}
+    end
+
     npc.Name = "${actor.nome}"
-    
-    local hum = Instance.new("Humanoid", npc)
-    local hrp = Instance.new("Part", npc)
-    hrp.Name = "HumanoidRootPart"
-    hrp.Position = position
-    hrp.Size = Vector3.new(2, 2, 1)
-    hrp.Parent = npc
-    hrp.Color = Color3.fromRGB(0, 150, 255)
-    
-    -- Aplicar Estética ao NPC
-${this.applyArtisticFinalization("hrp", actor.metadados)}
     
     -- Configurar IA
     local config = Instance.new("Configuration", npc)
@@ -186,7 +213,7 @@ ${this.applyArtisticFinalization("hrp", actor.metadados)}
 ${aiScript}
     ]]
     
-    print("[EZ Studios] Ator ${actor.nome} spawnado via Registry.")
+    print("[EZ Studios] Ator ${actor.nome} spawnado.")
     return npc
 end
 
@@ -200,7 +227,7 @@ return ActorEngine
             id: entidade.id,
             hash: entidade.metadados.hashGeracao,
             estetica: entidade.metadados.estetica || "Padrão",
-            registryVersion: "1.0.0"
+            registryVersion: "2.3.0"
         };
     }
 }

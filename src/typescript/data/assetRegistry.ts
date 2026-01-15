@@ -72,6 +72,10 @@ public class FireSword : MonoBehaviour {
     }
 }`,
         },
+        modelIds: {
+            roblox: "rbxassetid://123456789", // Realistic Fire Sword
+            unity: "unity_asset_sword_fire_v1"
+        },
         fallbackConfig: {
             color: "#FF4500",
             size: [0.5, 4, 0.5],
@@ -94,6 +98,9 @@ tool.Activated:Connect(function()
     end
 end)`
         },
+        modelIds: {
+            roblox: "rbxassetid://987654321", // Sci-Fi Potion
+        },
         fallbackConfig: {
             color: "#00FF00",
             size: [1, 1, 1],
@@ -114,6 +121,9 @@ while true do
     local target = Vector3.new(math.random(-10,10), 0, math.random(-10,10)) + root.Position
     hum:MoveTo(target)
 end`
+        },
+        modelIds: {
+            roblox: "rbxassetid://456123789", // Professional NPC Body
         },
         fallbackConfig: {
             color: "#0000FF",
@@ -159,6 +169,13 @@ export function resolveAssetBehavior(category: string, tags: string[], engine: "
     }
 
     return getDefaultBehavior(category, engine);
+}
+
+export function resolveAssetDefinition(category: string, tags: string[]): AssetDefinition | undefined {
+    return ASSET_REGISTRY.find(a =>
+        a.category === category &&
+        a.tags.some(t => tags.map(x => x.toLowerCase()).includes(t.toLowerCase()))
+    );
 }
 
 function getDefaultBehavior(category: string, engine: string): string {

@@ -4,6 +4,7 @@ import { Button } from "../components/ui/button";
 import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 import { globalLogger } from "../infra/logging/logger";
+import { analyticsEngine, SystemMetrics } from "../infra/logging/analyticsEngine";
 
 // --- Types ---
 interface Trilha {
@@ -65,23 +66,26 @@ const ProgressBar = ({ progress, colorClass = "from-primary to-secondary" }: { p
 
 export default function Dashboard() {
   const [, navigate] = useLocation();
-  const [logs, setLogs] = useState(globalLogger.obterLogsEstruturados());
+  const [metrics, setMetrics] = useState<SystemMetrics>(analyticsEngine.getMetrics());
 
   useEffect(() => {
-    setLogs(globalLogger.obterLogsEstruturados());
-  }, []);
+    setMetrics(analyticsEngine.getMetrics());
 
-  const successLogs = logs.filter((l: any) => l.buildStatus === "success");
-  const buildXP = successLogs.length * 50;
+    // Auto-refresh metrics every 10 seconds if needed, or just on mount
+    const timer = setInterval(() => {
+      setMetrics(analyticsEngine.getMetrics());
+    }, 10000);
+    return () => clearInterval(timer);
+  }, []);
 
   const [trilhas] = useState<Trilha[]>([
     {
       id: "luau-pro",
       nome: "Protocolo Luau",
       descricao: "Domine a linguagem nativa do Roblox.",
-      progresso: 10 + (successLogs.length * 5),
-      xp: 100 + buildXP,
-      nivelAtual: 1,
+      progresso: Math.min(100, 10 + (metrics.totalBuilds * 5)),
+      xp: 100 + (metrics.totalXP / 2),
+      nivelAtual: Math.floor(metrics.totalXP / 1000) + 1,
       nivelMaximo: 5,
       color: "from-[#00D9FF] to-[#0066FF]",
       icon: <Cpu size={24} className="text-[#00D9FF]" />,
@@ -90,8 +94,8 @@ export default function Dashboard() {
       id: "mundos",
       nome: "Arquiteto de Mundos",
       descricao: "Geração procedural de mapas complexos.",
-      progresso: Math.min(100, successLogs.filter((l: any) => l.categoria === "Mapa").length * 20),
-      xp: buildXP,
+      progresso: Math.min(100, (metrics.categoryDistribution["Mapa"] || 0) * 25),
+      xp: (metrics.categoryDistribution["Mapa"] || 0) * 100,
       nivelAtual: 1,
       nivelMaximo: 5,
       color: "from-[#FF006E] to-[#FFBE0B]",
@@ -105,7 +109,7 @@ export default function Dashboard() {
       nome: "Gênesis",
       descricao: "Crie seu primeiro mapa procedural.",
       icon: "🌌",
-      desbloqueado: successLogs.length > 0,
+      desbloqueado: metrics.totalBuilds > 0,
       raridade: "comum",
     },
     {
@@ -126,9 +130,9 @@ export default function Dashboard() {
     },
   ]);
 
-  const totalXP = trilhas.reduce((acc: number, t: Trilha) => acc + t.xp, 0);
-  const nivel = Math.floor(totalXP / 500) + 1;
-  const xpProxNivel = (nivel * 500) - totalXP;
+  const totalXP = metrics.totalXP;
+  const nivel = Math.floor(totalXP / 1000) + 1;
+  const xpProxNivel = (nivel * 1000) - totalXP;
 
   return (
     <div className="min-h-screen text-foreground font-sans selection:bg-primary/30">
@@ -243,12 +247,12 @@ export default function Dashboard() {
 
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <div className="p-4 rounded-xl bg-black/20 border border-white/5">
-                  <div className="text-2xl font-bold text-white mb-1">{successLogs.length}</div>
+                  <div className="text-2xl font-bold text-white mb-1">{metrics.totalBuilds}</div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">Compilações</div>
                 </div>
                 <div className="p-4 rounded-xl bg-black/20 border border-white/5">
-                  <div className="text-2xl font-bold text-accent mb-1">{badges.filter(b => b.desbloqueado).length}</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Conquistas</div>
+                  <div className="text-2xl font-bold text-accent mb-1">{metrics.hoursSaved.toFixed(1)}h</div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Horas Salvas</div>
                 </div>
               </div>
             </div>
