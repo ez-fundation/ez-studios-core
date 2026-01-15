@@ -23,6 +23,7 @@ import { globalLogger } from "../infra/logging/logger";
 import { IEngineAdapter } from "../adapters";
 import { globalLLM } from "./llmAdapter";
 import { intentDataStore } from "../data/intentDataStore";
+import { i18n, CanonicalConcept } from "../core/i18n";
 
 /**
  * Memória de Sessão (Simples)
@@ -208,34 +209,46 @@ export function compilarIntencao(
  */
 export function parsePrompt(prompt: string): Intencao {
   const p = prompt.toLowerCase();
+  
+  // 0. Resolve Conceitos Poliglotas
+  const concepts = i18n.resolveConcepts(p);
 
   // 1. Detectar Categoria
   let categoria: "Mapa" | "Item" | "Actor" = globalSession.lastCategory || "Mapa"; // Default memory
   
-  // Detecção Fuzzy de Categoria
-  if (fuzzyIncludes(p, "item") || fuzzyIncludes(p, "espada") || fuzzyIncludes(p, "pocao") || fuzzyIncludes(p, "arma") || fuzzyIncludes(p, "sword")) categoria = "Item";
-  else if (fuzzyIncludes(p, "actor") || fuzzyIncludes(p, "npc") || fuzzyIncludes(p, "monstro") || fuzzyIncludes(p, "boss") || fuzzyIncludes(p, "guard")) categoria = "Actor";
-  else if (fuzzyIncludes(p, "mapa") || fuzzyIncludes(p, "dungeon") || fuzzyIncludes(p, "cidade")) categoria = "Mapa";
+  if (concepts.includes("CATEGORY_ITEM")) categoria = "Item";
+  else if (concepts.includes("CATEGORY_ACTOR")) categoria = "Actor";
+  else if (concepts.includes("CATEGORY_MAP")) categoria = "Mapa";
 
   // Atualiza memória
   globalSession.lastCategory = categoria;
 
-  // 2. Extrair Tags / Keywords
+  // 2. Extrair Tags (Baseado nos conceitos resolvidos + keywords originais como fallback)
   const tags: string[] = [];
-  const keywords = ["fogo", "gelo", "floresta", "dungeon", "cidade", "cyberpunk", "medieval", "futurista", "natureza", "sombrio", "radiante"];
+  
+  // Add canonical tags
+  if (concepts.includes("TAG_FIRE")) tags.push("fogo", "fire");
+  if (concepts.includes("TAG_ICE")) tags.push("gelo", "ice");
+  if (concepts.includes("TAG_SWORD")) tags.push("espada");
+  if (concepts.includes("TAG_POTION")) tags.push("pocao");
+  if (concepts.includes("TAG_MONSTER")) tags.push("monstro");
+  if (concepts.includes("TAG_NPC")) tags.push("npc");
 
+  // Keep original loose keyword matching for untranslated terms
+  const keywords = ["floresta", "dungeon", "cidade", "cyberpunk", "medieval", "futurista", "natureza", "sombrio", "radiante"];
   keywords.forEach(k => {
     if (fuzzyIncludes(p, k)) tags.push(k);
   });
 
   // 3. Detectar Parâmetros Específicos
-  const parametros: any = {};
+  const parametros: any = {
+    tags
+  };
 
-  // Estética
-  // Estética (Fuzzy)
-  if (fuzzyIncludes(p, "cyber") || fuzzyIncludes(p, "quantum")) parametros.estetica = "Quantum";
-  else if (fuzzyIncludes(p, "medieval") || fuzzyIncludes(p, "rpg")) parametros.estetica = "Realistic";
-  else if (fuzzyIncludes(p, "lowpoly") || fuzzyIncludes(p, "simples")) parametros.estetica = "LowPoly";
+  // Estética (Polyglot)
+  if (concepts.includes("AESTHETIC_CYBER")) parametros.estetica = "Quantum";
+  else if (concepts.includes("AESTHETIC_MEDIEVAL")) parametros.estetica = "Realistic";
+  else if (concepts.includes("AESTHETIC_LOWPOLY")) parametros.estetica = "LowPoly";
   else parametros.estetica = "Quantum"; // Default system aesthetic
 
   // Dimensões (Simples heurística)
@@ -247,11 +260,10 @@ export function parsePrompt(prompt: string): Intencao {
     parametros.largura = 32; parametros.altura = 32;
   }
 
-  // Item Specifics
-  // Item Specifics (Fuzzy)
+  // Item Specifics (Polyglot)
   if (categoria === "Item") {
-    if (fuzzyIncludes(p, "espada") || fuzzyIncludes(p, "sword")) parametros.tipo = "espada";
-    else if (fuzzyIncludes(p, "pocao") || fuzzyIncludes(p, "potion")) parametros.tipo = "pocao";
+    if (concepts.includes("TAG_SWORD")) parametros.tipo = "espada";
+    else if (concepts.includes("TAG_POTION")) parametros.tipo = "pocao";
   }
 
   return {

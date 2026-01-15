@@ -11,7 +11,10 @@
     "build": "tsc && vite build",
     "dev": "vite",
     "preview": "vite preview",
-    "mcp": "tsx src/typescript/mcp/server.ts"
+    "mcp": "tsx src/typescript/mcp/server.ts",
+    "test:fuzzy": "tsx scripts/test-intent-fuzzy.ts",
+    "test:polyglot": "tsx scripts/test-intent-polyglot.ts",
+    "docs:sync": "cd tools/docsync && .venv/Scripts/python -m docsync"
   },
   "keywords": [
     "procedural",

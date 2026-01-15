@@ -1,6 +1,16 @@
 
-import * as fs from 'fs';
-import * as path from 'path';
+// Isomorphic check
+const isNode = typeof process !== 'undefined' && process.versions && process.versions.node;
+
+// Lazy imports for Node only
+let fs: any = null;
+let path: any = null;
+
+if (isNode) {
+  // Use require or dynamic import to avoid Vite bundling issues if possible, 
+  // but since this is TS/ESM, we might need a different approach.
+  // For now, let's just guard the calls.
+}
 
 export interface TemplateContext {
   [key: string]: string | number | boolean;
@@ -11,26 +21,43 @@ export class TemplateEngine {
   private baseDir: string;
 
   constructor(baseDir: string = 'src/templates') {
-    // Resolve absolute path based on CWD or relative to this file
-    this.baseDir = path.resolve(process.cwd(), baseDir);
+    this.baseDir = baseDir;
+    
+    // Attempt to resolve only in Node
+    if (isNode) {
+        try {
+            path = require('path');
+            fs = require('fs');
+            this.baseDir = path.resolve(process.cwd(), baseDir);
+        } catch (e) {
+            console.warn("[TemplateEngine] Node modules not available in this environment.");
+        }
+    }
   }
 
   /**
-   * Carrega um template do disco (com cache simples)
+   * Carrega um template (Disco no Node, Mock/Fetch no Browser)
    */
   public loadTemplate(templatePath: string): string {
     if (this.templatesCache.has(templatePath)) {
       return this.templatesCache.get(templatePath)!;
     }
 
-    const fullPath = path.join(this.baseDir, templatePath);
-    try {
-      const content = fs.readFileSync(fullPath, 'utf-8');
-      this.templatesCache.set(templatePath, content);
-      return content;
-    } catch (e) {
-      console.error(`[TemplateEngine] Erro ao carregar template: ${fullPath}`, e);
-      throw new Error(`Template not found: ${templatePath}`);
+    if (isNode && fs && path) {
+        const fullPath = path.join(this.baseDir, templatePath);
+        try {
+          const content = fs.readFileSync(fullPath, 'utf-8');
+          this.templatesCache.set(templatePath, content);
+          return content;
+        } catch (e) {
+          console.error(`[TemplateEngine] Erro ao carregar template: ${fullPath}`, e);
+          throw new Error(`Template not found: ${templatePath}`);
+        }
+    } else {
+        // Browser Fallback: For now, return a placeholder or empty string to avoid crash
+        // In the future, this could be a fetch() or a pre-populated map
+        console.warn(`[TemplateEngine] Browser environment: Dynamic loading of ${templatePath} not implemented.`);
+        return `-- [EZ Studios] Browser Template Fallback for ${templatePath}\n-- Logic generation limited in browser context.`;
     }
   }
 

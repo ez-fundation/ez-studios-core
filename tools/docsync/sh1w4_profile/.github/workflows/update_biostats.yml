@@ -1,0 +1,35 @@
+name: Update Bio-Stats
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-svg:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Generate SVG
+        run: |
+          python generate_biostats.py
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add biostats.svg
+          # Only commit if there are changes
+          git diff --quiet && width=10 || git commit -m "🧬 Bio-Stats Evolved [Auto-Generated]"
+          git push

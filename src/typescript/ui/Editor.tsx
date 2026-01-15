@@ -30,6 +30,7 @@ import { RobloxAdapter } from "../adapters/robloxAdapter";
 import { ConfigBSP, ConfigWFC, TileInstance, MapaGerado, Tile, Intencao } from "../core/models/types";
 import { intentDataStore } from "../data/intentDataStore";
 import { globalLLM } from "../compiler/llmAdapter";
+import { NeuralAssistant } from "./components/NeuralAssistant";
 
 // --- Components ---
 const Tooltip = ({ label }: { label: string }) => (
@@ -477,20 +478,30 @@ export default function Editor() {
             {/* Overlay Loader */}
             {isGenerating && (
               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center pointer-events-none">
-                <div className="flex flex-col items-center">
-                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary mb-4 shadow-[0_0_15px_#00d9ff]" />
-                  <span className="text-primary font-mono text-sm animate-pulse tracking-[0.2em]">INTENT ANALYZER...</span>
-                </div>
+                {algorithm === "INTENT" ? (
+                   <NeuralAssistant isProcessing={true} status="ANALYZING INTENT..." />
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary mb-4 shadow-[0_0_15px_#00d9ff]" />
+                    <span className="text-primary font-mono text-sm animate-pulse tracking-[0.2em]">INTENT ANALYZER...</span>
+                  </div>
+                )}
               </div>
             )}
 
             {/* Empty State */}
             {!lastGeneratedMap && !isGenerating && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30">
-                <div className="text-center">
-                  <Grid size={48} className="mx-auto mb-2 text-white" />
-                  <p className="text-sm font-mono text-white">READY FOR INPUT</p>
-                </div>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                {algorithm === "INTENT" ? (
+                  <div className="scale-150">
+                    <NeuralAssistant status="NEURAL LINK READY" />
+                  </div>
+                ) : (
+                  <div className="text-center opacity-30">
+                    <Grid size={48} className="mx-auto mb-2 text-white" />
+                    <p className="text-sm font-mono text-white">READY FOR BUILDER</p>
+                  </div>
+                )}
               </div>
             )}
           </div>

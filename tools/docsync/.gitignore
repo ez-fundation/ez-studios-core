@@ -1,0 +1,38 @@
+# Python virtual environment
+.venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage reports
+.coverage
+.pytest_cache/
+coverage.xml
+.tox/
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+
+# Internal Strategy Docs
+MONETIZATION_STRATEGY.md
+ESTRATEGIA_MONETIZACAO_CONFIDENCIAL.md

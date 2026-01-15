@@ -1,0 +1,92 @@
+<svg width="100%" height="150" viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* @import removed for GitHub compatibility */
+    
+    .strand {
+      fill: none;
+      stroke-width: 4;
+      stroke-linecap: round;
+    }
+    
+    .node {
+      filter: drop-shadow(0 0 5px currentColor);
+    }
+    
+    @keyframes moveStrand1 {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-200px); }
+    }
+    
+    @keyframes oscillate {
+      0%, 100% { transform: translateY(-20px); opacity: 0.5; }
+      50% { transform: translateY(20px); opacity: 1; }
+    }
+    
+    @keyframes rotateHue {
+      0% { color: #00ff41; }
+      50% { color: #bd93f9; }
+      100% { color: #00ff41; }
+    }
+    
+    .dna-container {
+      animation: rotateHue 10s infinite linear;
+    }
+    
+    .particle {
+      animation: oscillate 2s ease-in-out infinite;
+    }
+  </style>
+
+  <rect width="100%" height="100%" fill="#0d1117" opacity="0"/>
+  
+  <g class="dna-container" transform="translate(0, 75)">
+    <!-- Generating a procedural DNA strand sequence using SVG repetition -->
+    <defs>
+      <g id="base-pair">
+        <circle cx="0" cy="-25" r="4" class="node" fill="currentColor">
+          <animate attributeName="cy" values="-25;25;-25" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="r" values="4;2;4" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="0" cy="25" r="4" class="node" fill="currentColor" opacity="0.5">
+          <animate attributeName="cy" values="25;-25;25" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <line x1="0" y1="-25" x2="0" y2="25" stroke="currentColor" stroke-width="1" opacity="0.3">
+           <animate attributeName="y1" values="-25;25;-25" dur="2s" repeatCount="indefinite" />
+           <animate attributeName="y2" values="25;-25;25" dur="2s" repeatCount="indefinite" />
+        </line>
+      </g>
+    </defs>
+
+    <!-- Repeater nodes -->
+    <use href="#base-pair" x="50" ><animateTransform attributeName="transform" type="translate" from="50 0" to="50 0" dur="2s" begin="-0.0s"/></use>
+    <use href="#base-pair" x="80" ><animateTransform attributeName="transform" type="translate" from="80 0" to="80 0" dur="2s" begin="-0.2s"/></use>
+    <use href="#base-pair" x="110"><animateTransform attributeName="transform" type="translate" from="110 0" to="110 0" dur="2s" begin="-0.4s"/></use>
+    <use href="#base-pair" x="140"><animateTransform attributeName="transform" type="translate" from="140 0" to="140 0" dur="2s" begin="-0.6s"/></use>
+    <use href="#base-pair" x="170"><animateTransform attributeName="transform" type="translate" from="170 0" to="170 0" dur="2s" begin="-0.8s"/></use>
+    <use href="#base-pair" x="200"><animateTransform attributeName="transform" type="translate" from="200 0" to="200 0" dur="2s" begin="-1.0s"/></use>
+    <use href="#base-pair" x="230"><animateTransform attributeName="transform" type="translate" from="230 0" to="230 0" dur="2s" begin="-1.2s"/></use>
+    <use href="#base-pair" x="260"><animateTransform attributeName="transform" type="translate" from="260 0" to="260 0" dur="2s" begin="-1.4s"/></use>
+    <use href="#base-pair" x="290"><animateTransform attributeName="transform" type="translate" from="290 0" to="290 0" dur="2s" begin="-1.6s"/></use>
+    <use href="#base-pair" x="320"><animateTransform attributeName="transform" type="translate" from="320 0" to="320 0" dur="2s" begin="-1.8s"/></use>
+    <use href="#base-pair" x="350"><animateTransform attributeName="transform" type="translate" from="350 0" to="350 0" dur="2s" begin="-2.0s"/></use>
+    <use href="#base-pair" x="380"><animateTransform attributeName="transform" type="translate" from="380 0" to="380 0" dur="2s" begin="-2.2s"/></use>
+    <use href="#base-pair" x="410"><animateTransform attributeName="transform" type="translate" from="410 0" to="410 0" dur="2s" begin="-2.4s"/></use>
+    <use href="#base-pair" x="440"><animateTransform attributeName="transform" type="translate" from="440 0" to="440 0" dur="2s" begin="-2.6s"/></use>
+    <use href="#base-pair" x="470"><animateTransform attributeName="transform" type="translate" from="470 0" to="470 0" dur="2s" begin="-2.8s"/></use>
+    <use href="#base-pair" x="500"><animateTransform attributeName="transform" type="translate" from="500 0" to="500 0" dur="2s" begin="-3.0s"/></use>
+    <use href="#base-pair" x="530"><animateTransform attributeName="transform" type="translate" from="530 0" to="530 0" dur="2s" begin="-3.2s"/></use>
+    <use href="#base-pair" x="560"><animateTransform attributeName="transform" type="translate" from="560 0" to="560 0" dur="2s" begin="-3.4s"/></use>
+    <use href="#base-pair" x="590"><animateTransform attributeName="transform" type="translate" from="590 0" to="590 0" dur="2s" begin="-3.6s"/></use>
+    <use href="#base-pair" x="620"><animateTransform attributeName="transform" type="translate" from="620 0" to="620 0" dur="2s" begin="-3.8s"/></use>
+    <use href="#base-pair" x="650"><animateTransform attributeName="transform" type="translate" from="650 0" to="650 0" dur="2s" begin="-4.0s"/></use>
+    <use href="#base-pair" x="680"><animateTransform attributeName="transform" type="translate" from="680 0" to="680 0" dur="2s" begin="-4.2s"/></use>
+    <use href="#base-pair" x="710"><animateTransform attributeName="transform" type="translate" from="710 0" to="710 0" dur="2s" begin="-4.4s"/></use>
+    <use href="#base-pair" x="740"><animateTransform attributeName="transform" type="translate" from="740 0" to="740 0" dur="2s" begin="-4.6s"/></use>
+
+  </g>
+  
+  <text x="50%" y="140" text-anchor="middle" font-family="Consolas, monospace" fill="#586069" font-size="10" letter-spacing="4">SEQUENCING_GENOME...</text>
+</svg>
