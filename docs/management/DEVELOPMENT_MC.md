@@ -1,19 +1,20 @@
 # MISSION CONTROL (MC) - DESENVOLVIMENTO 🚀
 > **Arquivo Mestre de Rastreamento de Progresso**
 > **Codinome**: EZ Studios Agnostic Core
-> **Status**: 🟢 OPERACIONAL (Fase 33 Concluída)
+> **Status**: 🟢 OPERACIONAL (Fase 38 Concluída)
 
 ---
 
 ## 1. Sessão Atual
 **Data**: 14/01/2026
-**Foco**: Materialização Poliglota e Inteligência de Intenção.
-**Último Commit Virtual**: 2.3.0
+**Foco**: IA Evolutiva, Analytics Financeiro e Conectividade MCP.
+**Último Commit**: 2.4.0
 
 ### Conquistas Recentes (High-Impact):
-- [x] **Compilador de Intenção (Fase 32)**: O sistema agora entende linguagem natural ("Masmorra de Fogo") e compila para regras WFC.
-- [x] **Registro Poliglota (Fase 33)**: Criação do `AssetRegistry.ts` que desacopla lógica (Scripts Lua/C#) da engine.
-- [x] **Premium UI**: Implementação completa da estética "Cyberpunk Executive" no Editor e Dashboard.
+- [x] **Cognição AI (Fase 36)**: Transição para LLM assíncrono com RLHF e coleta de dataset JSONL.
+- [x] **Monetização Multi-Canal (Fase 37)**: Dashboard agora rastreia Marketplace, Comissões e ROI por hora.
+- [x] **Universal Connectivity (Fase 38)**: Lançamento do EZ Studios MCP Server para integração com agentes de IA.
+- [x] **Marketplace Sync (Fase 34)**: Integração real de `rbxassetid` no registro poliglota.
 
 ---
 
@@ -21,26 +22,24 @@
 
 | Fase | Título | Status | Entregável Chave |
 | :--- | :--- | :---: | :--- |
-| **20-29** | Core & UI Foundation | ✅ DONE | Editor.tsx, BSP/WFC Engines |
-| **30** | Logic Integration | ✅ DONE | Wiring UI to Core |
-| **31** | QA & Testing | ✅ DONE | Test Runner, CI Fixes |
-| **32** | Intent Compiler (Brain) | ✅ DONE | `promptParser`, `compilarIntencao` |
-| **33** | Materialization (Body) | ✅ DONE | `AssetRegistry` (Polyglot) |
-| **34** | Real Marketplace Sync | 🟡 NEXT | Mapear IDs reais do Roblox |
-| **35** | Data Analytics | 🔴 TODO | Dashboard de Métricas de Uso |
+| **32-33** | Core & Intent | ✅ DONE | Registry, promptParser |
+| **34** | Real Marketplace Sync | ✅ DONE | Hybrid Generation (rbxassetid) |
+| **35** | Data Analytics | ✅ DONE | AnalyticsEngine, Dashboard |
+| **36** | AI Evolution | ✅ DONE | LLMAdapter, RLHF, IntentDataStore |
+| **37** | Multi-Channel Monetization | ✅ DONE | Revenue Hub, ROI Tracking |
+| **38** | MCP Integration | ✅ DONE | mcp/server.ts, AI Tooling |
 
 ---
 
 ## 3. Backlog Técnico (A Fazer)
 
-### Prioridade Alta (Semana Atual)
-- [ ] **Integração de IDs Reais**: Substituir placeholders no `AssetRegistry` por IDs de modelos reais do Roblox (ou Proxies).
-- [ ] **Expansão de Vocabulário**: Melhorar o `promptParser` para entender mais adjetivos (ex: "antigo", "tecnológico").
-- [ ] **Unity Adapter (Stub)**: Criar o esqueleto do adaptador Unity para provar a tese poliglota.
+### Prioridade Alta (Futuro/v15)
+- [ ] **Fine-Tuning Local**: Treinar modelo Gemma-2b com o dataset gerado hoje.
+- [ ] **Expansão Unity**: Materializar os comportamentos do Registry em C# real.
+- [ ] **Exportador Final**: Automação total de `git-to-roblox` via CLI.
 
 ### Prioridade Média
-- [ ] **User Auth**: Conectar Dashboard a um sistema de login real (mockado atualmente).
-- [ ] **Save System**: Persistir mapas gerados no LocalStorage ou Backend.
+- [ ] **User Auth**: Substituir o mock de login por integração Firebase/Supabase.
 
 ---
 
@@ -48,19 +47,17 @@
 
 | Métrica | Valor | Status |
 | :--- | :--- | :--- |
-| **Build Status** | Pass (Exit Code 0) | 🟢 |
-| **Test Coverage** | ~85% Core Components | 🟢 |
-| **Lint Errors** | 0 Major Errors | 🟢 |
-| **Tech Debt** | Low (New Registry Pattern) | 🟢 |
+| **Versão** | 2.4.0 (AI Ready) | 🟢 |
+| **Conectividade** | MCP Server Active | 🟢 |
+| **Monetização** | Full Tracking Support | 🟢 |
 
 ---
 
 ## 5. Notas do Engenheiro (Logs)
 
-- **Log [Fase 31]:** Tivemos problemas com `$$` no path do Vitest. Solução: Runner customizado `manual_test_runner.ts`.
-- **Log [Fase 32]:** O compilador de intenção está funcional mas rudimentar (keyword matching). Futuro: Integrar LLM real.
-- **Log [Fase 33]:** A decisão de separar Scripts em `AssetRegistry` foi crucial para a escalabilidade multi-engine.
+- **Log [v2.3.1]:** A inclusão de métricas de ROI transformou o Dashboard de "curiosidade técnica" em uma ferramenta de negócio.
+- **Log [v2.4.0]:** O servidor MCP é o divisor de águas; o EZ Studios agora pode ser usado "de dentro" da mente de outras IAs.
 
 ---
 
-> _"A entropia foi reduzida a zero. O sistema está pronto para escalar."_
+> _"A barreira entre prompt e realidade foi quebrada. O metaverso agora é editável em linguagem humana."_

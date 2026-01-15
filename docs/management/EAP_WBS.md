@@ -1,7 +1,7 @@
 # EAP - ESTRUTURA ANALÍTICA DO PROJETO (WBS) 📑
 
 **PROJETO**: EZ Studios - Agnostic AI SaaS  
-**VERSÃO**: 2.3.0 (Polyglot Core)  
+**VERSÃO**: 2.4.0 (AI & MCP Powered)  
 **DATA**: 14 de Janeiro de 2026
 
 ---
@@ -34,6 +34,9 @@
 - **1.3.2 Processamento de Linguagem Natural**
   - 1.3.2.1 Prompt Parser (Text-to-Intent)
   - 1.3.2.2 Keyword Extraction Engine
+- **1.3.3 RLHF (Human-in-the-Loop)**
+  - 1.3.3.1 Active Correction UI (Editor Feedback)
+  - 1.3.3.2 DataStore Pattern for Fine-Tuning
 
 ### 1.4 AGNOSTIC CORE v2.3.0 (ENGINE LAYER)
 - **1.4.1 Núcleo Matemático**
@@ -43,6 +46,9 @@
   - 1.4.2.1 Compilador de Intent para Código IR
   - 1.4.2.2 Polyglot Asset Registry (Lua/C#/GDScript)
   - 1.4.2.3 Sistema de Logs de Alta Performance (GlobalLogger)
+- **1.4.3 Intelligence & Value Engine**
+  - 1.4.3.1 Analytics Engine (Metrics & KPIs)
+  - 1.4.3.2 Multi-Channel Monetization Hub (ROI Tracking)
 
 ### 1.5 UNIVERSAL CONNECTORS (INTEGRATION LAYER)
 - **1.5.1 Conectores Nativos**
@@ -50,6 +56,9 @@
   - 1.5.1.2 Unity & Godot Hub (via Registry)
 - **1.5.2 Cloud Sync**
   - 1.5.2.1 Protocolo de Exportação "One-Click"
+- **1.5.3 Agentic Connectivity**
+  - 1.5.3.1 MCP Server (Model Context Protocol)
+  - 1.5.3.2 Stdio/RPC Tooling Interface
 
 ---
 
