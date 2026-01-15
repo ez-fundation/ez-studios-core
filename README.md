@@ -1,4 +1,4 @@
-# 🌌 EZ Studios: Core Engine v2.3.0
+# 🌌 EZ Studios: Core Engine v2.4.1
 > **Entropia Zero Protocol** | Transforming the Next Generation of Consumers into **Quantum Architects**.
 
 ![EZ Studios Banner](./assets/concepts/agnostic_banner.png)
