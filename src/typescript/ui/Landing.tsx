@@ -219,33 +219,33 @@ export default function Landing() {
           {[
             {
               icon: Code2,
-              title: "Motor Procedural Elite",
-              desc: "WFC com Entropia de Shannon + BSP com otimização de streaming",
+              title: "O Enigma de Lego",
+              desc: "Mundos criados como quebra-cabeças que se encaixam sozinhos, guiados pelo seu gênio criativo.",
             },
             {
               icon: Gamepad2,
-              title: "Compilador de Intenção",
-              desc: "Transforma regras visuais em código Luau automaticamente",
+              title: "O Cérebro do Herói",
+              desc: "Transforme seus pensamentos e comandos de voz em realidade digital instantaneamente.",
             },
             {
               icon: TrendingUp,
-              title: "Pedagogia Científica",
-              desc: "Meta-análise 2020-2025 com g=0.46 em cognição",
+              title: "Academia de Magia Decodificada",
+              desc: "Um caminho de aprendizado baseado na ciência, onde programar vira diversão pura e poder real.",
             },
             {
               icon: Users,
-              title: "Comunidade Gamificada",
-              desc: "XP, Badges, Leaderboard, Marketplace UGC integrado",
+              title: "Comunidade de Criadores",
+              desc: "Ganhe XP, conquiste badges e suba no rank enquanto constrói seu império digital.",
             },
             {
               icon: Star,
-              title: "Monetização Integrada",
-              desc: "Educação → Motor → UGC → DevEx (4 streams de receita)",
+              title: "Jornada do Magnata Digital",
+              desc: "Aprenda, crie e lucre. O EZ Studios é o primeiro passo para sua soberania no metaverso.",
             },
             {
               icon: Zap,
-              title: "Performance Extrema",
-              desc: "Geração de mapas em <5 segundos, streaming de 4MB chunks",
+              title: "Velocidade do Pensamento",
+              desc: "Geração de mundos em segundos, otimizada para ser leve, fluida e instantânea.",
             },
           ].map((feature, i) => (
             <motion.div
@@ -279,17 +279,17 @@ export default function Landing() {
         <div className="grid md:grid-cols-2 gap-8">
           {[
             {
-              title: "Luau Pro",
+              title: "Academia de Magia (Luau)",
               levels: 5,
               color: "from-primary to-secondary",
-              desc: "Blocos visuais → Sintaxe → Opcodes → Multithreading → Produção",
+              desc: "Aprenda feitiços de código para dar vida aos objetos e dominar o metaverso.",
               image: "/assets/track-luau.png"
             },
             {
-              title: "Mundos",
+              title: "Poder de Criar Mundos",
               levels: 5,
               color: "from-secondary to-accent",
-              desc: "WFC visual → Tilesets → WFC Luau → WFC 3D → Monetização",
+              desc: "Construa labirintos e cidades épicas usando lógica procedural de elite.",
               image: "/assets/track-worlds.png"
             },
             {
