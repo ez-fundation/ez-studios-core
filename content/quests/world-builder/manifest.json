@@ -1,0 +1,8 @@
+{
+  "id": "world-builder",
+  "name": "Poder de Criar Mundos",
+  "icon": "globe",
+  "description": "Construa labirintos e cidades épicas usando lógica procedural de elite.",
+  "levels": 5,
+  "reward": "Infinite City Generator Plugin"
+}

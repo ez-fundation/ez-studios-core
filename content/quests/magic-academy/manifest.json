@@ -1,0 +1,8 @@
+{
+  "id": "magic-academy",
+  "name": "Academia de Magia de Código",
+  "icon": "magic_wand",
+  "description": "Domine a arte dos feitiços em Luau e dê vida aos seus sonhos.",
+  "levels": 5,
+  "reward": "Magic Wand Script"
+}

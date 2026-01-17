@@ -1,0 +1,8 @@
+{
+  "id": "guardians-vault",
+  "name": "Cofre do Guardião",
+  "icon": "vault",
+  "description": "Domine a persistência de dados e proteja seu império de invasores.",
+  "levels": 5,
+  "reward": "Quantum Encryption Module"
+}
