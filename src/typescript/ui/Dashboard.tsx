@@ -81,8 +81,8 @@ export default function Dashboard() {
   const [trilhas] = useState<Trilha[]>([
     {
       id: "luau-pro",
-      nome: "Protocolo Luau",
-      descricao: "Domine a linguagem nativa do Roblox.",
+      nome: "Academia de Magia (Luau)",
+      descricao: "Aprenda feitiços de código para dar vida aos objetos.",
       progresso: Math.min(100, 10 + (metrics.totalBuilds * 5)),
       xp: 100 + (metrics.totalXP / 2),
       nivelAtual: Math.floor(metrics.totalXP / 1000) + 1,
@@ -92,8 +92,8 @@ export default function Dashboard() {
     },
     {
       id: "mundos",
-      nome: "Arquiteto de Mundos",
-      descricao: "Geração procedural de mapas complexos.",
+      nome: "Poder de Criar Mundos",
+      descricao: "Construa labirintos e cidades com blocos de lógica.",
       progresso: Math.min(100, (metrics.categoryDistribution["Mapa"] || 0) * 25),
       xp: (metrics.categoryDistribution["Mapa"] || 0) * 100,
       nivelAtual: 1,
