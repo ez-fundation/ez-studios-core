@@ -183,7 +183,7 @@ export default function Landing() {
           >
             <div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full" />
             <img 
-              src="/src/assets/hero-architect.png" 
+              src="/assets/hero-architect.png" 
               alt="Neural Architect"
               className="relative z-10 w-full h-full object-contain rounded-3xl shadow-2xl border border-primary/20 hero-mask"
             />
