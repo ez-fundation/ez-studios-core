@@ -8,8 +8,8 @@ async function testAnalyticsAggregation() {
     globalLogger.limpar();
 
     console.log('1. Injetando Logs Simulados...');
-    globalLogger.registrarSucesso("intent_1", "Mapa", "seed_1", "Roblox", { numTiles: 100 }, 1200);
-    globalLogger.registrarSucesso("intent_2", "Item", "seed_2", "Roblox", { dano: 10 }, 800);
+    globalLogger.registrarSucesso("intent_1", "Mapa", "seed_1", "Roblox", { numSetores: 4, numTiles: 100 }, 1200);
+    globalLogger.registrarSucesso("intent_2", "Item", "seed_2", "Roblox", { numSetores: 0, numTiles: 1, dano: 10 }, 800);
     globalLogger.registrarErro("intent_3", "Mapa", "seed_3", "Roblox", "Overflow", "Critical Error", undefined, 500);
 
     // 2. Processar Métricas

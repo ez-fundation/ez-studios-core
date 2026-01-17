@@ -10,11 +10,11 @@ async function testMonetizationAggregation() {
     console.log('1. Injetando Logs Simulados (Itens e Atores)...');
     // 10 Itens de Sucesso
     for (let i = 1; i <= 10; i++) {
-        globalLogger.registrarSucesso(`item_${i}`, "Item", `seed_${i}`, "Roblox", { dano: 10 }, 800);
+        globalLogger.registrarSucesso(`item_${i}`, "Item", `seed_${i}`, "Roblox", { numSetores: 0, numTiles: 1, dano: 10 }, 800);
     }
     // 10 Mapas de Sucesso
     for (let i = 1; i <= 10; i++) {
-        globalLogger.registrarSucesso(`map_${i}`, "Mapa", `seed_map_${i}`, "Roblox", { tiles: 100 }, 1500);
+        globalLogger.registrarSucesso(`map_${i}`, "Mapa", `seed_map_${i}`, "Roblox", { numSetores: 5, numTiles: 100 }, 1500);
     }
 
     // 2. Processar Métricas
