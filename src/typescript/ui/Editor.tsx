@@ -276,14 +276,27 @@ export default function Editor() {
 
     if (data.type === "BSP" && data.sectors) {
       data.sectors.forEach((s, i) => {
-        const x = s.bounds.x * scale + 50; // Offset check
+        const x = s.bounds.x * scale + 50;
         const y = s.bounds.y * scale + 50;
         const w = s.bounds.largura * scale;
         const h = s.bounds.altura * scale;
 
+        // Metaphor: Gift Box (Caixa de Presente)
+        // Background
         ctx.fillStyle = i % 2 === 0 ? "rgba(0, 217, 255, 0.2)" : "rgba(255, 0, 110, 0.2)";
         ctx.fillRect(x, y, w, h);
-        ctx.strokeStyle = "#00D9FF";
+        
+        // Ribbon (Fita de Presente)
+        ctx.strokeStyle = i % 2 === 0 ? "rgba(0, 217, 255, 0.4)" : "rgba(255, 0, 110, 0.4)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x + w/2, y); ctx.lineTo(x + w/2, y + h); // Vertical
+        ctx.moveTo(x, y + h/2); ctx.lineTo(x + w, y + h/2); // Horizontal
+        ctx.stroke();
+
+        // Border
+        ctx.strokeStyle = i % 2 === 0 ? "#00D9FF" : "#FF006E";
+        ctx.lineWidth = 1;
         ctx.strokeRect(x, y, w, h);
       });
     } else if (data.type === "WFC" && data.tiles) {
@@ -291,8 +304,21 @@ export default function Editor() {
         const x = t.x * scale + 50;
         const y = t.y * scale + 50;
 
-        ctx.fillStyle = t.tileId === "parede" ? "#FF006E" : "rgba(0, 217, 255, 0.3)";
+        // Metaphor: Lego Piece (Peça de Lego)
+        const isWall = t.tileId === "parede";
+        ctx.fillStyle = isWall ? "#FF006E" : "rgba(0, 217, 255, 0.3)";
         ctx.fillRect(x, y, scale, scale);
+        
+        // Draw Stud (O "botão" do Lego)
+        ctx.fillStyle = isWall ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 217, 255, 0.5)";
+        const studSize = scale * 0.4;
+        ctx.beginPath();
+        ctx.arc(x + scale/2, y + scale/2, studSize/2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Border for clear separation
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.strokeRect(x, y, scale, scale);
       });
     }
   };
