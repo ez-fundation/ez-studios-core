@@ -366,7 +366,7 @@ export default function Landing() {
               name: "Explorer",
               price: "49,90",
               desc: "Para iniciantes na jornada",
-              features: ["Acesso à Trilha Luau Pro", "Editor Básico", "10 Gerações/dia", "Suporte da Comunidade"],
+              features: ["Acesso à Trilha Luau Pro", "Editor Básico", "100 Neural Credits (ENC)", "Suporte da Comunidade"],
               highlight: false,
               color: "border-white/10"
             },
@@ -374,7 +374,7 @@ export default function Landing() {
               name: "Architect",
               price: "99,90",
               desc: "O padrão para criadores sérios",
-              features: ["Acesso Total (4 Trilhas)", "Motor WFC + BSP Completo", "Hosting Ilimitado", "Acesso ao Marketplace"],
+              features: ["Acesso Total (4 Trilhas)", "Motor WFC + BSP Completo", "1.000 Neural Credits (ENC)", "Hosting & Marketplace Global"],
               highlight: true,
               color: "border-primary shadow-[0_0_30px_rgba(0,255,157,0.3)] bg-primary/5"
             },
@@ -382,7 +382,7 @@ export default function Landing() {
               name: "Sovereign",
               price: "299,90",
               desc: "Elite com infraestrutura dedicada",
-              features: ["Tudo do Architect", "Mentorias Semanais", "Cloud Build Serverless", "Taxa Zero no Marketplace"],
+              features: ["Tudo do Architect", "5.000 Neural Credits (ENC)", "Cloud Build Serverless", "Mentorias & Taxa Zero"],
               highlight: false,
               color: "border-accent/50"
             }
