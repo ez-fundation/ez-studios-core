@@ -162,9 +162,9 @@ export default function Landing() {
               transition={{ delay: 0.8, duration: 0.8 }}
             >
               {[
-                { label: "Alunos Ativos", value: "1.000+" },
-                { label: "Mapas Gerados", value: "50.000+" },
-                { label: "Receita/Mês", value: "R$ 319K" },
+                { label: "Sistema de Rank", value: "Global" },
+                { label: "Conquistas (Badges)", value: "50+" },
+                { label: "Economia DevEx", value: "Real" },
               ].map((stat, i) => (
                 <div key={i}>
                   <div className="text-2xl font-bold text-primary">{stat.value}</div>
