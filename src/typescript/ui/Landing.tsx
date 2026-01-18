@@ -152,7 +152,7 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
           >
             <Button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/login")}
               className="bg-primary hover:bg-primary/80 text-background font-bold"
             >
               Entrar
@@ -200,16 +200,10 @@ export default function Landing() {
               transition={{ delay: 0.6, duration: 0.8 }}
             >
               <Button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/login")}
                 className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background font-bold text-lg px-8 py-6 rounded-lg flex items-center gap-2"
               >
                 Começar Agora <ArrowRight size={20} />
-              </Button>
-              <Button
-                variant="outline"
-                className="border-primary/50 text-primary hover:bg-primary/10 font-bold text-lg px-8 py-6 rounded-lg"
-              >
-                Ver Demo
               </Button>
             </motion.div>
 
@@ -479,9 +473,9 @@ export default function Landing() {
 
               <Button
                 className={`w-full font-bold py-6 ${tier.highlight ? 'bg-primary text-background hover:bg-primary/90' : 'bg-white/10 hover:bg-white/20 text-white'}`}
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/login")}
               >
-                Escolher {tier.name}
+                Inscrição {tier.name}
               </Button>
             </motion.div>
           ))}
@@ -504,10 +498,10 @@ export default function Landing() {
             Junte-se a 1.000+ alunos que já estão aprendendo desenvolvimento de elite no Roblox.
           </p>
           <Button
-            onClick={() => navigate("/dashboard")}
+            onClick={() => navigate("/login")}
             className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background font-bold text-lg px-12 py-6 rounded-lg"
           >
-            Acessar Dashboard <ArrowRight size={20} />
+            Criar Minha Conta <ArrowRight size={20} />
           </Button>
         </motion.div>
       </section>
@@ -608,9 +602,9 @@ export default function Landing() {
                 <div className="pt-6 border-t border-white/5 flex gap-4">
                   <Button 
                     className="flex-1 h-12 bg-core-green text-void-blue font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(0,255,157,0.4)]"
-                    onClick={() => navigate("/dashboard")}
+                    onClick={() => navigate("/login")}
                   >
-                    Começar Jornada
+                    Cadastrar na Academia
                   </Button>
                   <Button 
                     variant="outline" 
