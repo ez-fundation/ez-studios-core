@@ -1,0 +1,14 @@
+{
+    "id": "seed_83ef2d34",
+    "source": "Matrix3W32S.bin",
+    "dna_strings": [
+        "archeology",
+        "havok",
+        "render",
+        "ai",
+        "aion_bridge"
+    ],
+    "complexity_index": 6.5,
+    "aesthetic_profile": "Cybernetic",
+    "is_sovereign": true
+}
